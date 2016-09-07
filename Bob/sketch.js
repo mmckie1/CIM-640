@@ -35,6 +35,8 @@ function draw() {
 
     //nose
     rect(150, 150, 100, 100, 40);
+    fill('black');
+    text("Click Here", 10,30);
   
 }
 
