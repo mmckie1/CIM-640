@@ -8,12 +8,12 @@ var offsetY = 0;
 var clickHere = false;
 var blu = 'blue';
 var message = false;
-var messageArray =[];
+var i = 0;
+var messageArray = new Array("Hi my name is Bob!", "I am Morgan's Spirit Animal.");
 
 function setup() {
   createCanvas(500, 500);
-//   background(0,255,0);
-
+   
  
 }
 
@@ -44,9 +44,7 @@ function draw() {
     //nose
     rect(150, 150, 100, 100, 40);
     fill('black');
-    //text("Click Here", 20,30);
-    //fill(blu);
-    //rect(10,20,80,40);
+
 
   // When mouse moves reveal "click Here" button  
   if(clickHere == true){
@@ -59,17 +57,13 @@ function draw() {
 
   //Reveal text box with message  
     if (message == true){
-      hello = "Hi, my name is Bob."
       fill('white');
       rect(300,300,150,100, 10);
       fill('black');
       textSize(20);
-      //for (var i = 0; i<messageArray.length; i++){
-        text(hello,310,300,150,100);
-      //}
-        
-      }
-}
+      text(messageArray[i],310,300,150,100);
+    }  
+  }
 
   //When mouse moves
   function mouseMoved(){
@@ -82,7 +76,13 @@ function draw() {
       if (d<50){
         message = true;
       }
+     
+     i++;  
+     if (i >= messageArray.length){
+       i = 0;
+     }
   }
+  
   
   
 
