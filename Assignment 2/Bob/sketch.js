@@ -8,6 +8,7 @@ var offsetY = 0;
 var clickHere = false;
 var blu = 'blue';
 var message = false;
+var messageArray =[];
 
 function setup() {
   createCanvas(500, 500);
@@ -46,7 +47,8 @@ function draw() {
     //text("Click Here", 20,30);
     //fill(blu);
     //rect(10,20,80,40);
-  
+
+  // When mouse moves reveal "click Here" button  
   if(clickHere == true){
     fill(blu);
     rect(10,20,80,40,20);
@@ -54,21 +56,28 @@ function draw() {
     textSize(15);
     text("Click Here", 15,40);
   }
-  
+
+  //Reveal text box with message  
     if (message == true){
-    hello = "Hi, my name is Bob."
-    fill('white');
-    rect(300,300,150,100, 10);
-    fill('black');
-    textSize(20);
-    text(hello,310,300,150,100);
-  }
+      hello = "Hi, my name is Bob."
+      fill('white');
+      rect(300,300,150,100, 10);
+      fill('black');
+      textSize(20);
+      //for (var i = 0; i<messageArray.length; i++){
+        text(hello,310,300,150,100);
+      //}
+        
+      }
 }
+
+  //When mouse moves
   function mouseMoved(){
     clickHere = true;
 }
-
+  //When the user clicks the mouse
   function mousePressed(){
+    //Check if mouse is on "click here" button
     var d = dist(mouseX,mouseY,10, 20)
       if (d<50){
         message = true;
