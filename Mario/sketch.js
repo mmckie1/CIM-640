@@ -1,16 +1,18 @@
 var screenW = 512;
 var screenH = 432;
-var player;
-var gameOver;
-var bgImg;
 
-var GRAVITY = 1;
-var boundary;
+var player;
+var bgImg;
+var groundImg;
+var GROUND_Y = 368;
 
 function setup() {
   createCanvas(screenW,screenH);
  
-  bgImg = loadImage("assets/sky.gif")
+  bgImg = loadImage("assets/sky.gif");
+  groundImg = loadImage("assets/ground-top.gif");
+  ground = createSprite(screenW/2, GROUND_Y); //image 800x200
+  ground.addImage(groundImg);
   
   //create a sprite and add the 3 animations
   player = createSprite(screenW/2,screenH/2,40,40);
@@ -51,17 +53,15 @@ function draw() {
       player.mirrorX(1);
       player.velocity.x = 2;
     }
-    player.position.y = 400;
+    player.position.y = 350;
     player.changeAnimation("running");
   }
   
-  
-  
-  if (keyIsDown(UP_ARROW) && player.animation != "jumping" ){
+  if (keyIsDown(UP_ARROW) && player.animation != "running" ){
       player.velocity.y = -5;
       player.changeAnimation("jumping");
-      if (player.position.y <= 300){
-          player.position.y = 400;  
+      if (player.position.y <= 250){
+          player.position.y = 350;  
       }
     player.changeAnimation("jumping");
   }
@@ -70,9 +70,9 @@ function draw() {
   if(!keyIsDown(LEFT_ARROW)  && !keyIsDown(RIGHT_ARROW) && !keyIsDown(UP_ARROW)){
     player.changeAnimation("standing");
     player.velocity.x = 0;
-    player.position.y = 400;  
-    if (player.position.y >= 300){
-        player.position.y = 400;  
+    player.position.y = 350;  
+    if (player.position.y >= 250){
+        player.position.y = 350;  
     }
   }
   
@@ -85,11 +85,12 @@ function draw() {
   background(color(0,100,190));
   camera.off();
   image(bgImg);
-  drawSprites();
-
- 
+  drawSprite(player);
+  drawSprite(ground);
   
 }
+
+
 
 
 
