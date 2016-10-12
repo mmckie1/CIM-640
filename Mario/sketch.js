@@ -7,6 +7,7 @@ var groundImg;
 var GROUND_Y = 368;
 
 function setup() {
+
   createCanvas(screenW,screenH);
  
   bgImg = loadImage("assets/sky.gif");
@@ -34,7 +35,8 @@ function setup() {
   player.addAnimation("dead", "assets/Dead-mario_01.png", "assets/Dead-mario_02.png");
   //updateSprites(true);
   
-  player.animation = "standing";
+  //player.animation = "standing";
+  
   
 
 }
@@ -54,12 +56,11 @@ function draw() {
       player.velocity.x = 2;
     }
     player.position.y = 350;
-    player.changeAnimation("running");
+    //player.changeAnimation("running");
   }
   
-  if (keyIsDown(UP_ARROW) && player.animation != "running" ){
+  if (keyIsDown(UP_ARROW) && player.getAnimationLabel() != "jumping" ){
       player.velocity.y = -5;
-      player.changeAnimation("jumping");
       if (player.position.y <= 250){
           player.position.y = 350;  
       }
@@ -76,7 +77,13 @@ function draw() {
     }
   }
   
- 
+  if (keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW)){
+    player.changeAnimation("running");
+  } //else {
+    //player.changeAnimation("standing");
+  //}
+  
+  console.log("This is the current animation: " + player.getAnimationLabel()); 
   //console.log("This is the x velocity" + player.velocity.x); 
   //console.log("This is the x position" + player.position.x);
   //console.log("This is the y velocity" + player.velocity.y);
