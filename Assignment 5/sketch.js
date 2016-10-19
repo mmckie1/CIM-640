@@ -2,9 +2,17 @@ var bgImg;
 
 var player0;
 var playerImg;
-var player
+var player;
+
+var groundImg;
+var ground;
+
 function setup() {
   createCanvas(512,432);
+  
+  groundImg = loadImage("assets/ground-top.gif");
+  ground = createSprite(width/2,368); //image 800x200
+  ground.addImage(groundImg);
   //playerImg = loadImage("assets/Standing-mario.gif");
   bgImg = loadImage("assets/sky.gif");
   player = createSprite(width/2,height/2,40,40);
@@ -23,7 +31,15 @@ function draw() {
   background(color(0,100,190));
   camera.off();
   image(bgImg);
+  drawSprite(ground);
   player0.display();
+  
+  
+  console.log("This is the current animation: " + player.getAnimationLabel()); 
+  //console.log("This is the x velocity " + player.velocity.x); 
+  //console.log("This is the x position " + player.position.x);
+  //console.log("This is the y velocity " + player.velocity.y);
+  console.log("This is the y position " + player.position.y);
 
 }
 
@@ -47,13 +63,9 @@ function players(tempW,tempH,tempSprite){
       this.sprite.changeAnimation("running");
     }
     
-    if (keyIsDown(UP_ARROW) && this.sprite.animation != "running" ){
+    if (keyIsDown(UP_ARROW) && this.sprite.animation != "jumping" && this.sprite.position.y == 350 ){
       this.sprite.velocity.y = -5;
       this.sprite.changeAnimation("jumping");
-      if (this.sprite.position.y <= 250){
-          this.sprite.position.y = 350;  
-      }
-    this.sprite.changeAnimation("jumping");
     }
     
     if(!keyIsDown(LEFT_ARROW)  && !keyIsDown(RIGHT_ARROW) && !keyIsDown(UP_ARROW)){
