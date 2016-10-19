@@ -2,9 +2,18 @@ var screenW = 512;
 var screenH = 432;
 
 var player;
+
 var bgImg;
+
 var groundImg;
+var groundArray = [];
+
+var startGame = false;
+var currentPos = 0;
+
 var GROUND_Y = 368;
+
+
 
 function setup() {
 
@@ -36,15 +45,13 @@ function setup() {
   //updateSprites(true);
   
   //player.animation = "standing";
-  
-  
 
 }
 
 function draw() {
 
 
-  player.velocity.x = 0;
+  //player.velocity.x = 0;
   
   if (keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW)){
     if (keyIsDown(LEFT_ARROW)){
@@ -55,6 +62,7 @@ function draw() {
       player.mirrorX(1);
       player.setVelocity(2,0);
     }
+<<<<<<< HEAD
     player.position.y = 350;
   }
   
@@ -64,27 +72,52 @@ function draw() {
       }
       player.setVelocity(0,-5);
     player.changeAnimation("jumping");
+=======
   }
   
+  if (startGame == true){
+    if (keyIsDown(UP_ARROW) && player.getAnimationLabel() != "jumping" && player.position.y == 350){
+      player.velocity.y = -5;
+      if (player.position.y == 250){
+      player.position.y = 350 
+      }
+      player.changeAnimation("jumping");
+    }
+>>>>>>> origin/master
+  }
   
   if(!keyIsDown(LEFT_ARROW)  && !keyIsDown(RIGHT_ARROW) && !keyIsDown(UP_ARROW)){
     player.changeAnimation("standing");
+<<<<<<< HEAD
     player.position.y = 350;
     player.setVelocity(0,0);
     if (player.position.y >= 250){
         player.position.y = 350;  
     }
+=======
+    player.velocity.x = 0;
+    player.velocity.y = 0;
+    player.position.y = 350;  
+>>>>>>> origin/master
   }
   
   if (keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW)){
     player.changeAnimation("running");
   } 
   
+<<<<<<< HEAD
   console.log("This is the current animation: " + player.getAnimationLabel()); 
   console.log("This is the x velocity " + player.velocity.x); 
   //console.log("This is the x position " + player.position.x);
   console.log("This is the y velocity " + player.velocity.y);
   //console.log("This is the y position" + player.position.y);
+=======
+  //console.log("This is the current animation: " + player.getAnimationLabel()); 
+  console.log("This is the x velocity " + player.velocity.x); 
+  console.log("This is the x position " + player.position.x);
+  console.log("This is the y velocity " + player.velocity.y);
+  console.log("This is the y position " + player.position.y);
+>>>>>>> origin/master
   
   background(color(0,100,190));
   camera.off();
@@ -92,6 +125,10 @@ function draw() {
   drawSprite(player);
   drawSprite(ground);
   
+}
+
+function mousePressed() {
+  startGame = true;
 }
 
 
