@@ -10,7 +10,7 @@ function setup() {
   player = createSprite(width/2,height/2,40,40);
   
   var myAnimation = player.addAnimation("standing", "assets/Standing-mario.gif");
-  player.addAnimation("running", "assets/Running-mario_01.png","assets/Running-mario_02.png","assets/Running-mario_03.png","assets/Running-mario_04.png");
+  player.addAnimation("running", "assets/Running-mario_01.png","assets/Running-mario_02.png","assets/Rplunning-mario_03.png","assets/Running-mario_04.png");
   player.addAnimation("jumping", "assets/Jumping-mario.gif");
   player.addAnimation("dead", "assets/Dead-mario_01.png", "assets/Dead-mario_02.png");
   //player0 = new players(width/2,height/2,playerImg);

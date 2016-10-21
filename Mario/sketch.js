@@ -88,10 +88,10 @@ function draw() {
   //}
   
   //console.log("This is the current animation: " + player.getAnimationLabel()); 
-  console.log("This is the x velocity " + player.velocity.x); 
-  console.log("This is the x position " + player.position.x);
-  console.log("This is the y velocity " + player.velocity.y);
-  console.log("This is the y position " + player.position.y);
+  //console.log("This is the x velocity " + player.velocity.x); 
+  //console.log("This is the x position " + player.position.x);
+  //console.log("This is the y velocity " + player.velocity.y);
+  //console.log("This is the y position " + player.position.y);
   
   background(color(0,100,190));
   camera.off();
