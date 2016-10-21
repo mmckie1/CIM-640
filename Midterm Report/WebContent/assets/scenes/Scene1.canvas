@@ -1,0 +1,259 @@
+{
+  "settings": {
+    "sceneWidth": 640,
+    "sceneHeight": 360,
+    "generateOnSave": true,
+    "enableStepping": false
+  },
+  "world": {
+    "type": "group",
+    "id": "aff9d13e-5cfd-4a0f-8d03-6816eaa15c6c",
+    "info": {
+      "editorName": "Scene1",
+      "editorClosed": false,
+      "physicsGroup": false,
+      "children": [
+        {
+          "type": "tileSprite",
+          "id": "4b35ee3a-10de-4a2c-aaa5-3ac082507877",
+          "asset-ref": {
+            "file": "WebContent/assets/assets-pack.json",
+            "section": "level",
+            "asset": "sky_2"
+          },
+          "info": {
+            "editorName": "sky_2",
+            "editorPublic": true,
+            "x": -20,
+            "y": -278,
+            "width": 1252.296549320221,
+            "height": 639.3600616455078,
+            "asset-ref": {
+              "file": "WebContent/assets/assets-pack.json",
+              "section": "level",
+              "asset": "sky_2",
+              "sprite": "sky_2"
+            }
+          }
+        },
+        {
+          "type": "tileSprite",
+          "id": "c4b46eb0-7da4-4af6-8a4a-612116ab15d2",
+          "asset-ref": {
+            "file": "WebContent/assets/assets-pack.json",
+            "section": "level",
+            "asset": "sky"
+          },
+          "info": {
+            "editorName": "sky",
+            "editorPublic": true,
+            "x": -14.40000057220459,
+            "y": -70,
+            "width": 1267.3968877792358,
+            "height": 432,
+            "asset-ref": {
+              "file": "WebContent/assets/assets-pack.json",
+              "section": "level",
+              "asset": "sky",
+              "sprite": "sky"
+            }
+          }
+        },
+        {
+          "type": "tileSprite",
+          "id": "852b11f0-9866-49ec-8940-6077fde4cc91",
+          "asset-ref": {
+            "file": "WebContent/assets/assets-pack.json",
+            "section": "level",
+            "asset": "top"
+          },
+          "info": {
+            "editorName": "top",
+            "x": -0.9800024032592773,
+            "y": 314,
+            "width": 1224.2729320526123,
+            "height": 16,
+            "asset-ref": {
+              "file": "WebContent/assets/assets-pack.json",
+              "section": "level",
+              "asset": "top",
+              "sprite": "top"
+            }
+          }
+        },
+        {
+          "type": "tileSprite",
+          "id": "ee9cf6cc-9d88-4684-a007-7726567096ae",
+          "asset-ref": {
+            "file": "WebContent/assets/assets-pack.json",
+            "section": "level",
+            "asset": "filler"
+          },
+          "info": {
+            "editorName": "filler",
+            "x": -0.5400075912475586,
+            "y": 330,
+            "width": 1225.8551616668701,
+            "height": 121.1199951171875,
+            "asset-ref": {
+              "file": "WebContent/assets/assets-pack.json",
+              "section": "level",
+              "asset": "filler",
+              "sprite": "filler"
+            }
+          }
+        },
+        {
+          "type": "group",
+          "id": "581a2a65-d67a-4375-a4fb-b22e1299cec4",
+          "info": {
+            "editorName": "coins",
+            "editorPublic": true,
+            "x": 149,
+            "editorClosed": false,
+            "physicsGroup": true,
+            "children": [
+              {
+                "type": "spritesheet",
+                "id": "1e6cb98f-9d0e-4cae-9c67-0a967017455e",
+                "asset-ref": {
+                  "file": "WebContent/assets/assets-pack.json",
+                  "section": "level",
+                  "asset": "regular-coins",
+                  "sprite": "0"
+                },
+                "info": {
+                  "editorName": "regular_coins",
+                  "x": 232,
+                  "y": 293
+                }
+              },
+              {
+                "type": "spritesheet",
+                "id": "16f82952-b730-446c-b508-8733b06d71ce",
+                "asset-ref": {
+                  "file": "WebContent/assets/assets-pack.json",
+                  "section": "level",
+                  "asset": "regular-coins",
+                  "sprite": "0"
+                },
+                "info": {
+                  "editorName": "regular_coins1",
+                  "x": 248,
+                  "y": 293
+                }
+              },
+              {
+                "type": "spritesheet",
+                "id": "4a3a09f3-a6b5-499a-bbb2-5c7d5293e95d",
+                "asset-ref": {
+                  "file": "WebContent/assets/assets-pack.json",
+                  "section": "level",
+                  "asset": "regular-coins",
+                  "sprite": "0"
+                },
+                "info": {
+                  "editorName": "regular_coins2",
+                  "x": 262,
+                  "y": 293
+                }
+              },
+              {
+                "type": "spritesheet",
+                "id": "47f19532-4a50-4198-8e38-9f5b5e4fcb61",
+                "asset-ref": {
+                  "file": "WebContent/assets/assets-pack.json",
+                  "section": "level",
+                  "asset": "regular-coins",
+                  "sprite": "0"
+                },
+                "info": {
+                  "editorName": "regular_coins3",
+                  "x": 277,
+                  "y": 293
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "spritesheet",
+          "id": "975d4b30-a3cc-47e9-912a-41df0ab4e1c6",
+          "asset-ref": {
+            "file": "WebContent/assets/assets-pack.json",
+            "section": "level",
+            "asset": "player",
+            "sprite": "0"
+          },
+          "info": {
+            "editorName": "player",
+            "editorPublic": true,
+            "x": 48,
+            "y": 294,
+            "anchor.x": 0.5,
+            "animations": [
+              {
+                "name": "walk",
+                "frameRate": 15,
+                "loop": true,
+                "frames": [
+                  "0",
+                  "1",
+                  "2",
+                  "3"
+                ]
+              },
+              {
+                "name": "idle",
+                "frameRate": 0,
+                "loop": false,
+                "frames": ["0"]
+              }
+            ],
+            "body": {
+              "type": "ARCADE_RECT",
+              "offsetX": -0.40185546875,
+              "offsetY": -2.009368896484375,
+              "width": 16.20562744140625,
+              "height": 23.21502685546875
+            }
+          }
+        },
+        {
+          "type": "group",
+          "id": "5808163b-862c-4a9a-924c-ed06d297d8bf",
+          "info": {
+            "editorName": "collisionLayer",
+            "editorPublic": true,
+            "x": 1,
+            "editorClosed": false,
+            "physicsGroup": true,
+            "children": [{
+              "type": "tileSprite",
+              "id": "d3bfeb82-5754-48eb-b210-428c514de7e1",
+              "asset-ref": {
+                "file": "WebContent/assets/assets-pack.json",
+                "section": "level",
+                "asset": "collider"
+              },
+              "info": {
+                "editorName": "physics",
+                "editorPublic": true,
+                "x": -2,
+                "y": 317,
+                "width": 1223.0152950286865,
+                "height": 16,
+                "asset-ref": {
+                  "file": "WebContent/assets/assets-pack.json",
+                  "section": "level",
+                  "asset": "collider",
+                  "sprite": "collider"
+                }
+              }
+            }]
+          }
+        }
+      ]
+    }
+  }
+}

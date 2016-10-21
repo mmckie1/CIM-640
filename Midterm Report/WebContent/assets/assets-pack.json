@@ -1,0 +1,82 @@
+{
+    "level": [
+        {
+            "type": "spritesheet",
+            "key": "player",
+            "url": "assets/images/Mario.png",
+            "frameWidth": 15,
+            "frameHeight": 20,
+            "frameMax": 4,
+            "margin": 0,
+            "spacing": 0
+        },
+        {
+            "type": "image",
+            "key": "sky",
+            "url": "assets/images/sky.gif",
+            "overwrite": false
+        },
+        {
+            "type": "spritesheet",
+            "key": "Jumping-mario",
+            "url": "assets/images/Jumping-mario.gif",
+            "frameWidth": 15,
+            "frameHeight": 22,
+            "frameMax": 1,
+            "margin": 0,
+            "spacing": 0
+        },
+        {
+            "type": "image",
+            "key": "top",
+            "url": "assets/images/ground-top.gif",
+            "overwrite": false
+        },
+        {
+            "type": "image",
+            "key": "filler",
+            "url": "assets/images/ground-filler.gif",
+            "overwrite": false
+        },
+        {
+            "type": "script",
+            "key": "scene1",
+            "url": "assets/scenes/Scene1.js"
+        },
+        {
+            "type": "image",
+            "key": "sky_2",
+            "url": "assets/images/sky_2.gif",
+            "overwrite": false
+        },
+        {
+            "type": "image",
+            "key": "collider",
+            "url": "assets/images/ground/Layer 2.png",
+            "overwrite": false
+        },
+        {
+            "type": "image",
+            "key": "slant",
+            "url": "assets/images/ground/ground-slant.png",
+            "overwrite": false
+        },
+        {
+            "type": "spritesheet",
+            "key": "regular-coins",
+            "url": "assets/images/coins/Regular-coin.gif",
+            "frameWidth": 12,
+            "frameHeight": 15,
+            "frameMax": 4,
+            "margin": 0,
+            "spacing": 0
+        }
+    ],
+    "meta": {
+        "generated": "1476752195371",
+        "app": "Phaser Editor",
+        "url": "http://phasereditor.boniatillo.com",
+        "version": "1.0",
+        "copyright": "Arian Fornaris (c) 2015,2016"
+    }
+}
