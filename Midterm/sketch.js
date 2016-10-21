@@ -6,25 +6,29 @@ var playerImg;
 var player;
 
 var GROUND_Y = 350;
+var SCENE_W = 1024;
+var SCENE_H = 400;
 
-var touchGround = false;
+function preload() {
+  
+} 
 
 function setup() {
-  createCanvas(512,432);
+  createCanvas(500,600);
   
   //load background image
-  bgImg = loadImage("assets/sky.gif");
+  bgImg = loadImage("assets/sky.png");
   
   //load ground
-  groundImg = createSprite(width/2, 368);
-  groundImg.addImage(loadImage("assets/ground-top.gif"))
+  groundImg = createSprite(width/2, 390);
+  groundImg.addImage(loadImage("assets/top_ground.png"));
   
   //create player sprite
-  player = createSprite(width/2,350);
+  player = createSprite(0,250);
   
   //load different states of player
-  var myAnimation = player.addAnimation("standing", "assets/Standing-mario.gif");
-  player.addAnimation("running", "assets/Running-mario_01.png", "assets/Running-mario_02.png", "assets/Running-mario_03.png", "assets/Running-mario_04.png");
+  var myAnimation = player.addAnimation("standing", "assets/Sebastion_idle.png");
+  player.addAnimation("running", "assets/Sebastion_running_01.png", "assets/Sebastion_running_02.png", "assets/Sebastion_running_03.png");
   player.addAnimation("jumping", "assets/Jumping-mario.gif");
   
   //create player object 
@@ -33,9 +37,11 @@ function setup() {
 
 function draw() {
   
+  
   background(color(0,100,190));
-  camera.on();
-  image(bgImg);
+  image(bgImg,-450,70);
+  //camera.on();
+ 
   var curPlayerState = player0.check();
   player0.create(curPlayerState);
   drawSprites();
@@ -65,18 +71,7 @@ function Sebastian(tempSprite){
       this.sprite.velocity.x = 0;
     }
     
-    //console.log(this.sprite.velocity.y);
-    
-    if(curState == true){
-      this.sprite.velocity.y = 0;
-    }
-    
-    if (curState == true && keyIsDown(UP_ARROW)) {
-      this.sprite.velocity.y = -5;
-    } else if (this.sprite.position.y < 325){
-      //this.sprite.velocity.y = 0;
-      this.sprite.position.y = 350;
-    }
+    //console.log(curState);
     
     if (curState == true){
       if (this.sprite.velocity.x == 0){
@@ -84,14 +79,32 @@ function Sebastian(tempSprite){
       } else {
         this.sprite.changeAnimation("running");
       }
+      this.sprite.velocity.y = 0;
     }
-
-    //drawSprite(this.sprite);
+  
+    
+     if(this.sprite.position.x < 0){    
+      this.sprite.position.x = 0;  
+     }
+     if(this.sprite.position.y < 0){    
+      this.sprite.position.y = 0;  
+     }
+     if(this.sprite.position.x > 1000){
+      this.sprite.position.x = 1000;  
+     }
+     if(this.sprite.position.y > SCENE_H){
+      this.sprite.position.y = SCENE_H;
+     }
+     
+     
+    camera.position.x = this.sprite.position.x;
+    camera.position.y = 200;
+    camera.zoom = 1.5;
   }
   
   this.check = function(){
       
-    if(this.sprite.collide){
+    if(this.sprite.collide(groundImg)){
       return true;
     } else {
       return false;
