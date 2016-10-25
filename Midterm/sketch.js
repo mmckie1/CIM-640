@@ -1,9 +1,21 @@
-var bgImg;
+var bgImg01;
+var bgImg02;
 var groundImg;
+var ground01;
+var ground02;
+
+var title;
+
+var sprite_sheet_coins;
+var collectibles;
 
 var player0;
-var playerImg;
 var player;
+
+
+var audio;
+var jumpSound;
+var coinSound;
 
 var GROUND_Y = 350;
 var SCENE_W = 1024;
@@ -11,13 +23,29 @@ var SCENE_H = 400;
 
 function preload() {
   
+ audio = loadSound("assets/audio/Overworld.mp3");
+ jumpSound = loadSound("assets/audio/Jump.mp3");
+ coinSound = loadSound("assets/audio/Coin.mp3");
 } 
 
 function setup() {
   createCanvas(500,600);
   
+  jumpSound.setVolume(0.5);
+  coinSound.setVolume(0.5);
+  audio.setVolume(0.5);
+  audio.play();
+
+  title = loadImage("assets/Super.png")
   //load background image
-  bgImg = loadImage("assets/sky.png");
+  bgImg02 = loadImage("assets/sky_2.png");
+  bgImg01 = loadImage("assets/sky.png");
+  
+  ground01 = createSprite(250,350);
+  ground01.addImage(loadImage("assets/ledge.png"));
+  
+  ground02 = createSprite(300,350);
+  ground02.addImage(loadImage("assets/tall_ledge.png"));
   
   //load ground
   groundImg = createSprite(width/2, 390);
@@ -25,12 +53,21 @@ function setup() {
   
   //create player sprite
   player = createSprite(0,250);
-  
+
   //load different states of player
-  var myAnimation = player.addAnimation("standing", "assets/Sebastion_idle.png");
+  player.addAnimation("standing", "assets/Sebastion_idle.png");
   player.addAnimation("running", "assets/Sebastion_running_01.png", "assets/Sebastion_running_02.png", "assets/Sebastion_running_03.png");
-  player.addAnimation("jumping", "assets/Jumping-mario.gif");
+  player.addAnimation("jumping", "assets/Sebastion_jumping.png");
   
+
+  collectibles = new Group();
+  
+  //load coins animation
+  for (var i=0; i<10; i++){
+  var coins = createSprite(random(0,1000),345);
+  coins.addAnimation("idle","assets/coins/coins_01.png","assets/coins/coins_02.png","assets/coins/coins_03.png","assets/coins/coins_04.png");
+  collectibles.add(coins)
+  }
   //create player object 
   player0 = new Sebastian(player);
 }
@@ -39,23 +76,32 @@ function draw() {
   
   
   background(color(0,100,190));
-  image(bgImg,-450,70);
+  image(bgImg02,-450,70);
+  image(title,-100,70,200,100);
+  image(bgImg01,-450,70);
   //camera.on();
  
+  //check if player is colliding with ground
   var curPlayerState = player0.check();
+  //load player with handls 
   player0.create(curPlayerState);
+  
+  
+  //draw other sprites ie background and ground 
   drawSprites();
   
+
 }
+
 
 function Sebastian(tempSprite){
   
   this.sprite = tempSprite;
-  //console.log(this.sprite);
   
   this.create = function(curState){
     
-    this.sprite.velocity.y = 2;
+    //gravity
+    this.sprite.velocity.y = 3;
     
     if(keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW)){
       if (keyIsDown(LEFT_ARROW)){
@@ -67,21 +113,27 @@ function Sebastian(tempSprite){
         this.sprite.mirrorX(1);
         this.sprite.velocity.x = 2;
       }
+      this.sprite.changeAnimation("running");
     } else {
       this.sprite.velocity.x = 0;
     }
     
-    //console.log(curState);
-    
+    //if player is on the ground and not moving left or right 
+    //the animation is standing else he is running
     if (curState == true){
       if (this.sprite.velocity.x == 0){
         this.sprite.changeAnimation("standing");
       } else {
         this.sprite.changeAnimation("running");
       }
-      this.sprite.velocity.y = 0;
     }
-  
+    
+    //jump controls 
+    if (keyIsDown(UP_ARROW) && this.sprite.position.y <= 348){
+        this.sprite.velocity.y = -5;
+        this.sprite.changeAnimation("jumping");
+        jumpSound.play();
+      } 
     
      if(this.sprite.position.x < 0){    
       this.sprite.position.x = 0;  
@@ -96,7 +148,10 @@ function Sebastian(tempSprite){
       this.sprite.position.y = SCENE_H;
      }
      
-     
+    this.sprite.overlap(collectibles,collect); 
+    this.sprite.collide(ground01); 
+    this.sprite.collide(ground02);
+    
     camera.position.x = this.sprite.position.x;
     camera.position.y = 200;
     camera.zoom = 1.5;
@@ -112,7 +167,11 @@ function Sebastian(tempSprite){
     
   }
   
-  
+}
+
+function collect(collector,collected) {
+  collected.remove();
+  coinSound.play();
 }
   
   

@@ -62,7 +62,6 @@ function draw() {
       player.mirrorX(1);
       player.setVelocity(2,0);
     }
-<<<<<<< HEAD
     player.position.y = 350;
   }
   
