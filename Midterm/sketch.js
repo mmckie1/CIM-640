@@ -62,11 +62,11 @@ function setup() {
   audio.play();
 
   //load ledges
-  ground01 = createSprite(250,350);
-  ground01.addImage(loadImage("assets/ledge.png"));
+  ground02 = createSprite(250,350);
+  ground02.addImage(loadImage("assets/ledge.png"));
   
-  ground02 = createSprite(300,350);
-  ground02.addImage(loadImage("assets/tall_ledge.png"));
+  ground01 = createSprite(300,350);
+  ground01.addImage(loadImage("assets/tall_ledge.png"));
   
   //load ground
   groundImg = createSprite(width/2, 390);
