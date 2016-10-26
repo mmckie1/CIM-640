@@ -17,6 +17,7 @@ var player;
 var audio;
 var jumpSound;
 var coinSound;
+var wonSound;
 
 var GROUND_Y = 350;
 var SCENE_W = 1024;
@@ -26,7 +27,8 @@ function preload() {
   
  audio = loadSound("assets/audio/Overworld.mp3");
  jumpSound = loadSound("assets/audio/Jump.mp3");
- dieSound = loadSound("assets/audio/Dead mario.mp3")
+ dieSound = loadSound("assets/audio/Dead mario.mp3");
+ wonSound = loadSound("assets/audio/Course-clear.mp3") 
  coinSound = loadSound("assets/audio/Coin.mp3");
 } 
 
@@ -75,7 +77,7 @@ function setup() {
   
   enemy = createSprite(300,345);
   enemy.addAnimation("walking", "assets/enemy/koopa_standing.png","assets/enemy/koppa_walking.png","assets/enemy/koopa_standing.png");
-  
+  enemy.addAnimation("squish", "assets/enemy/squish_koopa02.png","assets/enemy/squish_koopa01.png","assets/enemy/squish_koopa02.png");
   
   koopa00 = new Koopa(enemy);
   
@@ -97,7 +99,7 @@ function draw() {
   player0.create(curPlayerState);
   
   //koopa00.controls();
-
+  //console.log(player0);
   
   //draw other sprites ie background and ground 
   drawSprites();
@@ -141,7 +143,7 @@ function Sebastian(tempSprite){
     }
     
     //jump controls 
-    if (keyIsDown(UP_ARROW) && this.sprite.position.y <= 348){
+    if (keyIsDown(UP_ARROW) && this.sprite.position.y <= 348.5){
         this.sprite.velocity.y = -5;
         this.sprite.changeAnimation("jumping");
         jumpSound.play();
@@ -154,7 +156,8 @@ function Sebastian(tempSprite){
       this.sprite.position.y = 0;  
      }
      if(this.sprite.position.x > 1000){
-      this.sprite.position.x = 1000;  
+      this.sprite.position.x = 1000;
+      Winner(this.sprite);
      }
      if(this.sprite.position.y > SCENE_H){
       this.sprite.position.y = SCENE_H;
@@ -162,12 +165,13 @@ function Sebastian(tempSprite){
      
     this.sprite.overlap(collectibles,collect);
     
-    this.sprite.overlap(enemy, die);
+    this.sprite.overlap(enemy, overlapHandle);
   
     //this.sprite.overlap(ground01);
     //this.sprite.collide(ground01); 
     //this.sprite.collide(ground02);
 
+   // console.log(this.sprite);
     camera.position.x = this.sprite.position.x;
     camera.position.y = 200;
     camera.zoom = 1.5;
@@ -208,14 +212,63 @@ function Koopa(tempEne) {
   
 }
 
+//remove remove tokens when ovelapped and plays token sound
 function collect(collector,collected) {
   collected.remove();
   coinSound.play();
 }
 
-function die(playerToDie, killer){
-  playerToDie.changeAnimation("dead");
-  playerToDie.bounce(groundImg);
+//function for when player interacts with enemy
+function overlapHandle(tempPlayer,tempEnemy){
+  
+  //if player overlaps from the top 
+  //chnage enemy animation to squish and remove enemy
+  //also increase player upward velocity 
+  if (tempPlayer.position.y <= 330){
+    tempEnemy.changeAnimation("squish");
+    tempPlayer.velocity.y =-5;
+    tempEnemy.remove();
+  } else {
+    //if player overlaps from the side call die function
+    die(tempPlayer,tempEnemy);
+  }
+  
 }
+
+//function for the death of player 
+function die(playerToDie, killer){
+  
+  //remove player from canvas 
+  playerToDie.remove();
+
+  //stop background audio 
+  audio.stop();
+  
+  //play dieing audio 
+  dieSound.play();
+  
+  //call gameover function 
+  gameOver();
+
+}
+//function for winnig the game 
+function Winner(tempThing){
+  audio.stop();
+  wonSound.play();
+  tempThing.remove();
+}
+
+//function lose the game 
+function gameOver() {
+  var button = createButton("Restart");
+  button.mousePressed(reset);
+  button.position(width/2,height/2);
+}
+
+//function for reseting the game 
+function reset(){
+  
+}
+  
   
   
