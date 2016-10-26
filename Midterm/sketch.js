@@ -6,8 +6,9 @@ var ground02;
 
 var title;
 
-var sprite_sheet_coins;
 var collectibles;
+var koopa00;
+var enemy;
 
 var player0;
 var player;
@@ -25,6 +26,7 @@ function preload() {
   
  audio = loadSound("assets/audio/Overworld.mp3");
  jumpSound = loadSound("assets/audio/Jump.mp3");
+ dieSound = loadSound("assets/audio/Dead mario.mp3")
  coinSound = loadSound("assets/audio/Coin.mp3");
 } 
 
@@ -32,15 +34,18 @@ function setup() {
   createCanvas(500,600);
   
   jumpSound.setVolume(0.5);
+  dieSound.setVolume(0.5);
   coinSound.setVolume(0.5);
   audio.setVolume(0.5);
   audio.play();
 
   title = loadImage("assets/Super.png")
+  
   //load background image
   bgImg02 = loadImage("assets/sky_2.png");
   bgImg01 = loadImage("assets/sky.png");
   
+  //load ledges
   ground01 = createSprite(250,350);
   ground01.addImage(loadImage("assets/ledge.png"));
   
@@ -58,22 +63,27 @@ function setup() {
   player.addAnimation("standing", "assets/Sebastion_idle.png");
   player.addAnimation("running", "assets/Sebastion_running_01.png", "assets/Sebastion_running_02.png", "assets/Sebastion_running_03.png");
   player.addAnimation("jumping", "assets/Sebastion_jumping.png");
-  
-
-  collectibles = new Group();
+  player.addAnimation("dead", "assets/Sebastion_dead01.png","assets/Sebastion_dead01.png");
   
   //load coins animation
+  collectibles = new Group();
   for (var i=0; i<10; i++){
-  var coins = createSprite(random(0,1000),345);
-  coins.addAnimation("idle","assets/coins/coins_01.png","assets/coins/coins_02.png","assets/coins/coins_03.png","assets/coins/coins_04.png");
-  collectibles.add(coins)
+    var coins = createSprite(random(0,1000),345);
+    coins.addAnimation("idle","assets/coins/coins_01.png","assets/coins/coins_02.png","assets/coins/coins_03.png","assets/coins/coins_04.png");
+    collectibles.add(coins);
   }
+  
+  enemy = createSprite(300,345);
+  enemy.addAnimation("walking", "assets/enemy/koopa_standing.png","assets/enemy/koppa_walking.png","assets/enemy/koopa_standing.png");
+  
+  
+  koopa00 = new Koopa(enemy);
+  
   //create player object 
   player0 = new Sebastian(player);
 }
 
 function draw() {
-  
   
   background(color(0,100,190));
   image(bgImg02,-450,70);
@@ -83,9 +93,11 @@ function draw() {
  
   //check if player is colliding with ground
   var curPlayerState = player0.check();
-  //load player with handls 
+  //load player with controlls 
   player0.create(curPlayerState);
   
+  //koopa00.controls();
+
   
   //draw other sprites ie background and ground 
   drawSprites();
@@ -148,18 +160,24 @@ function Sebastian(tempSprite){
       this.sprite.position.y = SCENE_H;
      }
      
-    this.sprite.overlap(collectibles,collect); 
-    this.sprite.collide(ground01); 
-    this.sprite.collide(ground02);
+    this.sprite.overlap(collectibles,collect);
     
+    this.sprite.overlap(enemy, die);
+  
+    //this.sprite.overlap(ground01);
+    //this.sprite.collide(ground01); 
+    //this.sprite.collide(ground02);
+
     camera.position.x = this.sprite.position.x;
     camera.position.y = 200;
     camera.zoom = 1.5;
+    
+    koopa00.controls();
   }
   
   this.check = function(){
       
-    if(this.sprite.collide(groundImg)){
+    if(this.sprite.collide(groundImg)|| this.sprite.collide(ground01)||this.sprite.collide(ground02)){
       return true;
     } else {
       return false;
@@ -169,9 +187,35 @@ function Sebastian(tempSprite){
   
 }
 
+function Koopa(tempEne) {
+  this.ene = tempEne;
+  
+  this.controls = function(){  
+  
+    if (this.ene.position.x <= 300){
+      this.ene.position.x = 300;
+      this.ene.mirrorX(-1);
+      this.ene.velocity.x = +1;
+    }
+    if (this.ene.position.x >= 450){
+      this.ene.position.x = 450;
+      this.ene.mirrorX(1);
+      this.ene.velocity.x = -1;
+    }
+
+  }
+  
+  
+}
+
 function collect(collector,collected) {
   collected.remove();
   coinSound.play();
+}
+
+function die(playerToDie, killer){
+  playerToDie.changeAnimation("dead");
+  playerToDie.bounce(groundImg);
 }
   
   
