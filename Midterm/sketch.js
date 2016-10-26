@@ -13,6 +13,14 @@ var enemy;
 var player0;
 var player;
 
+var myFont;
+var score = 0;
+
+var goal01;
+var goal02;
+var goal_slider;
+var finish;
+
 
 var audio;
 var jumpSound;
@@ -25,11 +33,23 @@ var SCENE_H = 400;
 
 function preload() {
   
- audio = loadSound("assets/audio/Overworld.mp3");
- jumpSound = loadSound("assets/audio/Jump.mp3");
- dieSound = loadSound("assets/audio/Dead mario.mp3");
- wonSound = loadSound("assets/audio/Course-clear.mp3") 
- coinSound = loadSound("assets/audio/Coin.mp3");
+  //myFont = loadFont("assets/font/LCD_Solid.tff")
+  
+  audio = loadSound("assets/audio/Overworld.mp3");
+  jumpSound = loadSound("assets/audio/Jump.mp3");
+  dieSound = loadSound("assets/audio/Dead mario.mp3");
+  wonSound = loadSound("assets/audio/Course-clear.mp3") 
+  coinSound = loadSound("assets/audio/Coin.mp3");
+  
+  title = loadImage("assets/Super.png");
+  //load background image
+  bgImg02 = loadImage("assets/sky_2.png");
+  bgImg01 = loadImage("assets/sky.png");
+  
+  goal01 = loadImage("assets/Goal-front.gif");
+  goal02 = loadImage("assets/Goal-back.gif");
+  //goal03 = loadImage("assets/Goal-slider.gif");
+  
 } 
 
 function setup() {
@@ -41,12 +61,6 @@ function setup() {
   audio.setVolume(0.5);
   audio.play();
 
-  title = loadImage("assets/Super.png")
-  
-  //load background image
-  bgImg02 = loadImage("assets/sky_2.png");
-  bgImg01 = loadImage("assets/sky.png");
-  
   //load ledges
   ground01 = createSprite(250,350);
   ground01.addImage(loadImage("assets/ledge.png"));
@@ -57,6 +71,15 @@ function setup() {
   //load ground
   groundImg = createSprite(width/2, 390);
   groundImg.addImage(loadImage("assets/top_ground.png"));
+  
+  goal01 = createSprite(1020,286);
+  goal01.addImage(loadImage("assets/Goal-front.gif"))
+  
+  goal02 = createSprite(985,286);
+  goal02.addImage(loadImage("assets/Goal-back.gif"));
+  
+  goal_slider = createSprite(1000,345);
+  goal_slider.addImage(loadImage("assets/Goal-slider.gif"));
   
   //create player sprite
   player = createSprite(0,250);
@@ -77,7 +100,9 @@ function setup() {
   
   enemy = createSprite(300,345);
   enemy.addAnimation("walking", "assets/enemy/koopa_standing.png","assets/enemy/koppa_walking.png","assets/enemy/koopa_standing.png");
-  enemy.addAnimation("squish", "assets/enemy/squish_koopa02.png","assets/enemy/squish_koopa01.png","assets/enemy/squish_koopa02.png");
+  enemy.addAnimation("squish", "assets/enemy/squish_koppa02.png","assets/enemy/squish_koopa01.png","assets/enemy/squish_koppa02.png");
+  
+  finish = new FinishLine(goal_slider);
   
   koopa00 = new Koopa(enemy);
   
@@ -91,7 +116,9 @@ function draw() {
   image(bgImg02,-450,70);
   image(title,-100,70,200,100);
   image(bgImg01,-450,70);
-  //camera.on();
+  
+
+  
  
   //check if player is colliding with ground
   var curPlayerState = player0.check();
@@ -177,6 +204,12 @@ function Sebastian(tempSprite){
     camera.zoom = 1.5;
     
     koopa00.controls();
+    
+    Score(this.sprite.position.x);
+    
+    finish.controls();
+    
+    
   }
   
   this.check = function(){
@@ -191,6 +224,7 @@ function Sebastian(tempSprite){
   
 }
 
+//function sets the boundaries for koopa Enemy 
 function Koopa(tempEne) {
   this.ene = tempEne;
   
@@ -212,22 +246,51 @@ function Koopa(tempEne) {
   
 }
 
+function FinishLine(tempfin) {
+  this.fin = tempfin;
+  
+  this.controls = function(){
+  
+    if (this.fin.position.y <= 250) {
+      this.fin.position.y = 250;
+      this.fin.velocity.y = 1;
+    }
+    if (this.fin.position.y >= 345) {
+      this.fin.position.y = 345;
+      this.fin.velocity.y = -1;
+    }
+  
+    
+  }
+  
+}
+
+function Score(tempX) {
+  fill("#ffffff").strokeWeight(2).textSize(10);
+  stroke(0);
+  textFont("Georgia");
+  text("Coins: " + score ,tempX-150,19);
+}
+
 //remove remove tokens when ovelapped and plays token sound
 function collect(collector,collected) {
   collected.remove();
   coinSound.play();
+  score++;
 }
 
 //function for when player interacts with enemy
 function overlapHandle(tempPlayer,tempEnemy){
   
-  //if player overlaps from the top 
-  //chnage enemy animation to squish and remove enemy
-  //also increase player upward velocity 
+  //setting immovable to true makes the sprite immune to bouncing and displacment 
+  tempEnemy.immovable = true;
+  
+  //if player overlaps from the top of Enemy 
   if (tempPlayer.position.y <= 330){
+    //change enemy animation to squish and remove enemy
     tempEnemy.changeAnimation("squish");
-    tempPlayer.velocity.y =-5;
-    tempEnemy.remove();
+    //player bounces against temp Enemy 
+    tempPlayer.bounce(tempEnemy);
   } else {
     //if player overlaps from the side call die function
     die(tempPlayer,tempEnemy);
