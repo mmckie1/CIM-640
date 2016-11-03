@@ -27,13 +27,13 @@ var jumpSound;
 var coinSound;
 var wonSound;
 
+var gravity = 3;
 var GROUND_Y = 350;
 var SCENE_W = 1024;
 var SCENE_H = 400;
 
 function preload() {
   
-  //myFont = loadFont("assets/font/LCD_Solid.tff")
   
   audio = loadSound("assets/audio/Overworld.mp3");
   jumpSound = loadSound("assets/audio/Jump.mp3");
@@ -41,14 +41,15 @@ function preload() {
   wonSound = loadSound("assets/audio/Course-clear.mp3") 
   coinSound = loadSound("assets/audio/Coin.mp3");
   
+  //load title
   title = loadImage("assets/Super.png");
+  
   //load background image
   bgImg02 = loadImage("assets/sky_2.png");
   bgImg01 = loadImage("assets/sky.png");
   
   goal01 = loadImage("assets/Goal-front.gif");
   goal02 = loadImage("assets/Goal-back.gif");
-  //goal03 = loadImage("assets/Goal-slider.gif");
   
 } 
 
@@ -62,11 +63,11 @@ function setup() {
   audio.play();
 
   //load ledges
-  ground02 = createSprite(250,350);
-  ground02.addImage(loadImage("assets/ledge.png"));
-  
   ground01 = createSprite(300,350);
   ground01.addImage(loadImage("assets/tall_ledge.png"));
+  
+  ground02 = createSprite(250,350);
+  ground02.addImage(loadImage("assets/ledge.png"));
   
   //load ground
   groundImg = createSprite(width/2, 390);
@@ -108,6 +109,8 @@ function setup() {
   
   //create player object 
   player0 = new Sebastian(player);
+ 
+ 
 }
 
 function draw() {
@@ -142,7 +145,7 @@ function Sebastian(tempSprite){
   this.create = function(curState){
     
     //gravity
-    this.sprite.velocity.y = 3;
+    this.sprite.velocity.y = gravity;
     
     if(keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW)){
       if (keyIsDown(LEFT_ARROW)){
@@ -161,8 +164,8 @@ function Sebastian(tempSprite){
     
     //if player is on the ground and not moving left or right 
     //the animation is standing else he is running
-    if (curState == true){
-      if (this.sprite.velocity.x == 0){
+    if (curState === true){
+      if (this.sprite.velocity.x === 0){
         this.sprite.changeAnimation("standing");
       } else {
         this.sprite.changeAnimation("running");
@@ -230,6 +233,7 @@ function Koopa(tempEne) {
   
   this.controls = function(){  
   
+  
     if (this.ene.position.x <= 300){
       this.ene.position.x = 300;
       this.ene.mirrorX(-1);
@@ -272,7 +276,7 @@ function Score(tempX) {
   text("Coins: " + score ,tempX-150,19);
 }
 
-//remove remove tokens when ovelapped and plays token sound
+//remove tokens when ovelapped and plays token sound
 function collect(collector,collected) {
   collected.remove();
   coinSound.play();
@@ -330,7 +334,7 @@ function gameOver() {
 
 //function for reseting the game 
 function reset(){
-  
+
 }
   
   
