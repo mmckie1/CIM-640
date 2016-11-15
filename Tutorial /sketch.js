@@ -29,7 +29,7 @@ function setup() {
 		textAlign(CENTER);
 		text("say something", width/2, height/2);
 		
-		//lexicon is a list of vocabulary
+		//lexicon is a list of vocabulary words
 		lexicon = new RiLexicon();  
     
     //function sets callback to fire when synthesis engine has reported a result.
@@ -45,7 +45,7 @@ function draw() {
 function getResult() {
   
   // if it is true that something was said
-  if(myRec.resultValue == true) {
+  if(myRec.resultValue === true) {
     //turn background green 
     background(192, 255, 192);
     //declare verse as a string containing the most recently detected speech
@@ -57,8 +57,9 @@ function getResult() {
     // step through the array with this for loop
     for(var i = 0; i < verseArray.length; i++) {
       //if word in array is a verb
-     if(lexicon.isVerb(verseArray[i]) == true) {
-        
+     if(lexicon.isVerb(verseArray[i]) === true) {
+        fill('red');
+        ellipse(random(-10,10),random(-10,10));
      }
     }
     
