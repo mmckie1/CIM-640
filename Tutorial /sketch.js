@@ -15,14 +15,14 @@ myRec.continuous = true;
 // String containing the most recently detected speech.
 var verse; 
 // Array of String containing the most recently detected speech. 
-var verseArray;
+var verseArray = [];
 
 function setup() {
     
     //graphics
     createCanvas(800, 400);
-		background(255, 255, 255);
-		fill(0, 0, 0, 255);
+		//background(255, 255, 255);
+		//fill(0, 0, 0, 255);
 		
 		// instructions:
 		textSize(32);
@@ -40,6 +40,15 @@ function setup() {
 
 function draw() {
   //why draw when you can talk!?!
+   // step through the array with this for loop
+  for(var i = 0; i < verseArray.length; i++) {
+    //if word in array is a verb
+    if(lexicon.isVerb(verseArray[i]) === true) {
+      //fill('red');
+      ellipse(10,10,10);
+    }
+  }
+  
 }
 
 function getResult() {
@@ -54,14 +63,9 @@ function getResult() {
     text(verse, width/2, height/2);
     //split 'verse' into an array 
     verseArray = verse.split(" "); 
-    // step through the array with this for loop
-    for(var i = 0; i < verseArray.length; i++) {
-      //if word in array is a verb
-     if(lexicon.isVerb(verseArray[i]) === true) {
-        fill('red');
-        ellipse(random(-10,10),random(-10,10));
-     }
-    }
-    
   }
+  // step through the array with this for loop
+ 
+    
+  
 }
