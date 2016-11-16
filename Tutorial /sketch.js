@@ -21,16 +21,16 @@ function setup() {
     
     //graphics
     createCanvas(800, 400);
-		//background(255, 255, 255);
-		//fill(0, 0, 0, 255);
+    //background(255, 255, 255);
+    //fill(0, 0, 0, 255);
 		
-		// instructions:
-		textSize(32);
-		textAlign(CENTER);
-		text("say something", width/2, height/2);
+    // instructions:
+    textSize(32);
+    textAlign(CENTER);
+    text("say something", width/2, height/2);
 		
-		//lexicon is a list of vocabulary words
-		lexicon = new RiLexicon();  
+    //lexicon is a list of vocabulary words
+    lexicon = new RiLexicon();  
     
     //function sets callback to fire when synthesis engine has reported a result.
     myRec.onResult = getResult;
