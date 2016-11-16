@@ -64,8 +64,6 @@ function getResult() {
     //split 'verse' into an array 
     verseArray = verse.split(" "); 
   }
-  // step through the array with this for loop
- 
     
   
 }
