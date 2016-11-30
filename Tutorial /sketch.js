@@ -39,7 +39,7 @@ function setup() {
 }
 
 function draw() {
-  //why draw when you can talk!?!
+  
    // step through the array with this for loop
   for(var i = 0; i < verseArray.length; i++) {
     //if word in array is a verb
