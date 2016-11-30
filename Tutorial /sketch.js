@@ -10,7 +10,7 @@
 // new P5.SpeechRec object 
 var myRec = new p5.SpeechRec();
 // do continuous recognition
-myRec.continuous = true;
+//myRec.continuous = true;
 
 // String containing the most recently detected speech.
 var verse; 
@@ -45,7 +45,7 @@ function draw() {
     //if word in array is a verb
     if(lexicon.isVerb(verseArray[i]) === true) {
       //fill('red');
-      ellipse(10,10,10);
+      ellipse(random(800),random(400),10);
     }
   }
   
