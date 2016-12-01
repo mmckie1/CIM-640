@@ -55,8 +55,13 @@ function setup() {
 		startButton.position(580,height/2);
 		startButton.mousePressed(startReading);
 		
+<<<<<<< Updated upstream
 		instructions = createElement('h2', 'Click Start to begin reading!');
 		instructions.position(450,100);
+=======
+		instructions = createElement('h1', 'Click Start to begin reading!');
+		instructions.position(200,100);
+>>>>>>> Stashed changes
     
 }
 
