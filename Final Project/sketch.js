@@ -18,7 +18,7 @@ var rightCanvas;
 var catArray = [];
 
 var start = false;
-var button;
+var startButton;
 var instructions;
 // String containing the most recently detected speech.
 var verse; 
@@ -27,10 +27,7 @@ var verseArray = [];
 
 function setup() {
     
-    //graphics
     createCanvas(800, 400);
-		//background(255, 255, 255);
-		//fill(0, 0, 0, 255);
 		
 		// instructions:
 		textSize(12);
@@ -45,27 +42,36 @@ function setup() {
 		scribble.bowing = 0.1;
 		scribble.roughness = 2;
 		
-		drawRightCanvas();
-		image(rightCanvas, 400, 0);
+		//Pages to read
+		//drawRightCanvas();
+		//image(rightCanvas, 400, 0);
+		
+		//Animation
+    drawLeftCanvas();
+    image(leftCanvas, 0, 0);
 		//drawBookCover();
 		
-		button = createButton('start');
-		button.position(580,height/2);
-		button.mousePressed(startReading
+		startButton = createButton('start');
+		startButton.position(580,height/2);
+		startButton.mousePressed(startReading);
 		
-		instructions = createElement('Click Start to begin reading!');
-		instructions.position(200,100);
+		instructions = createElement('h2', 'Click Start to begin reading!');
+		instructions.position(450,100);
     
-
 }
 
 function draw() {
-  
-  drawLeftCanvas();
-  
-  image(leftCanvas, 0, 0);
+  drawRightCanvas();
+	image(rightCanvas, 400, 0);
+  if (start == true){
+    drawBookCover();
+  }
 
 
+}
+
+function pageOne() {
+  
 }
 
 function drawLeftCanvas() {
@@ -79,17 +85,11 @@ function drawLeftCanvas() {
 function drawRightCanvas() {
   rightCanvas.background(255, 100, 255);
   rightCanvas.fill(0,0,0);
-  //rightCanvas.textSize(15);
-  //rightCanvas.textAlign(CENTER);
-  //rightCanvas.text("Click Start to begin reading!",200,100);
-
-
-
 }
 
 function drawBookCover() {
-  var x = 550;
-  var y = 250;
+  var xpos = 550;
+  var ypos = 250;
   var bounce = 2;
   
   strokeWeight(2);
@@ -97,23 +97,25 @@ function drawBookCover() {
   fill(0,0,0);
   textSize(12);
   text("The Very Hungry Caterpillar", 600, 100);
-
-  y = y + bounce;
   
-  if (y > 300 || y < 250){
-    bounce = bounce * -1;
+  ypos = ypos + bounce;
+  
+  if(ypos > 300) {
+    bounce = bounce * 1;
   }
-    
-  //Caterpillar
+  //Caterpillar 
+  //body
   for (var i = 0; i < 6; i++) {
     fill('rgb(0,255,0)');
-    scribble.scribbleEllipse(x,y,20,50);
-    x = x + 20;
+    scribble.scribbleEllipse(xpos,ypos,20,50);
+    xpos = xpos + 20;
   }
+  //eyes
   fill(255,255,255);
   strokeWeight(1);
   ellipse(650,240,5,5);
   ellipse(655,240,5,5);
+  
 }
 
 function mousePressed() {
@@ -121,5 +123,6 @@ function mousePressed() {
 }
 
 function startReading() {
-    drawBookCover();
+    instructions.html('');
+    startButton.remove();
 }
