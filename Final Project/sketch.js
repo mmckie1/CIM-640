@@ -9,18 +9,25 @@
 
 // new P5.SpeechRec object 
 var myRec = new p5.SpeechRec();
-var scribble = new Scribble();
 // do continuous recognition
 //myRec.continuous = true;
+
+//new p5.scribble object
+var scribble = new Scribble();
 
 var leftCanvas;
 var rightCanvas;
 var book = [];
+var pageText = ["In the light of the moon a little egg lay on a leaf.", 
+              "On Sunday morning the warm sun came up and pop! - out of the egg came a tiny and very hungry Caterpillar."]; 
+var pageNumber = 0;
+
 var catArray = [];
 
 var start = false;
 var startButton;
 var instructions;
+
 // String containing the most recently detected speech.
 var verse; 
 // Array of String containing the most recently detected speech. 
@@ -62,8 +69,8 @@ function setup() {
 		instructions.position(450,100);
 		
 		//controlls 
-		triangle(300, 10, 200,50,100,20)
 		
+		//book array full pages object 
 		for (var i=0; i<15; i++) {
       book.push(new Pages());
   }
@@ -83,7 +90,11 @@ function draw() {
 }
 
 function Pages() {
+  this.xleft = 480;
   
+  Pages.drawPage = function() {
+    
+  }
 }
 
 function drawLeftCanvas() {
