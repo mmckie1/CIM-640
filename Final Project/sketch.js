@@ -51,14 +51,10 @@ function setup() {
 		scribble.bowing = 0.1;
 		scribble.roughness = 2;
 		
-		//Pages to read
-		//drawRightCanvas();
-		//image(rightCanvas, 400, 0);
 		
-		//Animation
+		//Side for animation
     drawLeftCanvas();
     image(leftCanvas, 0, 0);
-		//drawBookCover();
 		
 		startButton = createButton('start');
 		startButton.position(580,height/2);
@@ -81,6 +77,8 @@ function setup() {
 
 function draw() {
   frameRate(5);
+  
+  //Side for text 
   drawRightCanvas();
 	image(rightCanvas, 400, 0);
   if (start === true) { 
