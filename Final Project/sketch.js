@@ -15,6 +15,7 @@ var scribble = new Scribble();
 
 var leftCanvas;
 var rightCanvas;
+var book = [];
 var catArray = [];
 
 var start = false;
@@ -24,6 +25,7 @@ var instructions;
 var verse; 
 // Array of String containing the most recently detected speech. 
 var verseArray = [];
+
 
 function setup() {
     
@@ -61,6 +63,11 @@ function setup() {
 		
 		//controlls 
 		triangle(300, 10, 200,50,100,20)
+		
+		for (var i=0; i<15; i++) {
+      book.push(new Pages());
+  }
+
 
     
 }
@@ -69,13 +76,13 @@ function draw() {
   frameRate(5);
   drawRightCanvas();
 	image(rightCanvas, 400, 0);
-  if (start == true) { 
+  if (start === true) { 
     drawBookCover();
   }
 
 }
 
-function pageOne() {
+function Pages() {
   
 }
 
