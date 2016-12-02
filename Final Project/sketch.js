@@ -55,23 +55,23 @@ function setup() {
 		startButton.position(580,height/2);
 		startButton.mousePressed(startReading);
 		
-<<<<<<< Updated upstream
+
 		instructions = createElement('h2', 'Click Start to begin reading!');
 		instructions.position(450,100);
-=======
-		instructions = createElement('h1', 'Click Start to begin reading!');
-		instructions.position(200,100);
->>>>>>> Stashed changes
+		
+		//controlls 
+		triangle(300, 10, 200,50,100,20)
+
     
 }
 
 function draw() {
+  frameRate(5);
   drawRightCanvas();
 	image(rightCanvas, 400, 0);
-  if (start == true){
+  if (start == true) { 
     drawBookCover();
   }
-
 
 }
 
@@ -95,23 +95,44 @@ function drawRightCanvas() {
 function drawBookCover() {
   var xpos = 550;
   var ypos = 250;
-  var bounce = 2;
+  var xleft, xright, ytop, ybottom;
   
+  //calculate the x and y coordinates for the border points of the hachure 
+  xleft   = 480;
+  xright  = 720;
+  ytop    = 60;
+  ybottom = 340;
+  
+  // the x coordinates of the border points of the hachure
+  var xCoords = [xleft, xright, xright, xleft];
+  // the y coordinates of the border points of the hachure
+  var yCoords = [ytop, ytop, ybottom, ybottom];
+  // the gap between two hachure lines
+  var gap     = 3.5;
+  // the angle of the hachure in degrees
+  var angle   = 315;
+  
+  // fill the rect with a hachure
   strokeWeight(2);
+  stroke(255,255,255);
+  scribble.scribbleFilling(xCoords,yCoords,gap,angle);
+  
+  
+  stroke(0)
   scribble.scribbleRect(600,height/2, 250, 300);
+  
+  //title
   fill(0,0,0);
+  strokeWeight(1);
   textSize(12);
   text("The Very Hungry Caterpillar", 600, 100);
+  text("by Eric Carle", 600, 150);
   
-  ypos = ypos + bounce;
   
-  if(ypos > 300) {
-    bounce = bounce * 1;
-  }
   //Caterpillar 
   //body
   for (var i = 0; i < 6; i++) {
-    fill('rgb(0,255,0)');
+    fill(0,random(255),0);
     scribble.scribbleEllipse(xpos,ypos,20,50);
     xpos = xpos + 20;
   }
@@ -120,6 +141,7 @@ function drawBookCover() {
   strokeWeight(1);
   ellipse(650,240,5,5);
   ellipse(655,240,5,5);
+  
   
 }
 
