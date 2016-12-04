@@ -63,10 +63,6 @@ function setup() {
 		startButton = createButton('start');
 		startButton.position(580,height/2);
 		startButton.mousePressed(startReading);
-		
-		nextButton = createButton('next');
-		nextButton.position(700,370);
-		nextButton.mousePressed(nextPage);
 
 		instructions = createElement('h2', 'Click Start to begin reading!');
 		instructions.position(450,100);
@@ -134,6 +130,7 @@ function draw() {
 	image(rightCanvas, 400, 0);
   if (start === true) { 
     drawBookCover();
+    drawNextButton();
   }
   
   if (next === true){
@@ -213,6 +210,12 @@ function drawBookCover() {
   ellipse(655,240,5,5);
   
   
+}
+
+function drawNextButton() {
+  	nextButton = createButton('next');
+		nextButton.position(700,370);
+		nextButton.mousePressed(nextPage);
 }
 
 function mousePressed() {
