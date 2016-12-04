@@ -18,8 +18,10 @@ var scribble = new Scribble();
 var leftCanvas;
 var rightCanvas;
 var book = [];
-var pageText = ["In the light of the moon a little egg lay on a leaf.", 
-              "On Sunday morning the warm sun came up and pop! - out of the egg came a tiny and very hungry Caterpillar."]; 
+var pageText = [,"In the light of the moon a little egg lay on a leaf.", 
+              "On Sunday morning the warm sun came up and pop! - out of the egg came a tiny and very hungry Caterpillar.",
+              "He started to look for some food.", "On Monday he ate through 1 apple. But he was still humgry.", 
+              "On Tuesday he ate through 2 pear, but he was still hungry.", "On Wednesday he ate through 3 plums, but he was still hungry."]; 
 var pageNumber = 0;
 
 var catArray = [];
@@ -27,7 +29,7 @@ var catArray = [];
 var start = false;
 var startButton;
 var instructions;
-
+var next = false;
 // String containing the most recently detected speech.
 var verse; 
 // Array of String containing the most recently detected speech. 
@@ -53,8 +55,8 @@ function setup() {
 		
 		
 		//Side for animation
-    drawLeftCanvas();
-    image(leftCanvas, 0, 0);
+    //drawLeftCanvas();
+    //image(leftCanvas, 0, 0);
 		
 		startButton = createButton('start');
 		startButton.position(580,height/2);
@@ -66,13 +68,58 @@ function setup() {
 		
 		//controlls 
 		
-		//book array full pages object 
-		for (var i=0; i<15; i++) {
-      book.push(new Pages());
-  }
-
-
-    
+		book[1] = {
+  
+      drawPage: function() {
+      scribble.scribbleEllipse(700, 90, 100, 100);
+      }
+		}
+		
+		book[2] = {
+  
+      drawPage: function() {
+      scribble.scribbleRect(700, 90, 100, 100);
+      }
+		}
+		book[3] = {
+		  xpos: 550,
+		  ypos: 250,
+  
+      drawPage: function() {
+        for (var i = 0; i < 6; i++) {
+          fill(0,random(255),0);
+          scribble.scribbleEllipse(this.xpos,this.ypos,20,50);
+          this.xpos = this.xpos + 20;
+        }
+        if (this.xpos = 400){
+          this.xpos = 550;
+        }
+        //eyes
+        fill(255,255,255);
+        strokeWeight(1);
+        ellipse(650,240,5,5);
+        ellipse(655,240,5,5);
+        }
+		}
+		book[4] = {
+  
+      drawPage: function() {
+      scribble.scribbleRect(700, 90, 100, 100);
+      }
+		}
+		book[5] = {
+  
+      drawPage: function() {
+      scribble.scribbleRect(700, 90, 100, 100);
+      }
+		}
+		book[6] = {
+  
+      drawPage: function() {
+      scribble.scribbleRect(700, 90, 100, 100);
+      }
+		}
+	
 }
 
 function draw() {
@@ -84,16 +131,19 @@ function draw() {
   if (start === true) { 
     drawBookCover();
   }
-
-}
-
-function Pages() {
-  this.xleft = 480;
   
-  Pages.drawPage = function() {
-    
+  if (next === true){
+    drawLeftCanvas();
+    image(leftCanvas, 0, 0);
+    //background(255, 100, 255);
+    drawRightCanvas();
+	  image(rightCanvas, 400, 0);
+    text(pageText[pageNumber], 0, 100, 400, 100);
+    book[pageNumber].drawPage();
   }
+
 }
+
 
 function drawLeftCanvas() {
   leftCanvas.background(0,0,0);
@@ -158,6 +208,18 @@ function drawBookCover() {
   ellipse(650,240,5,5);
   ellipse(655,240,5,5);
   
+  
+}
+
+function keyPressed() {
+  if (keyCode === 39){
+    next = true;
+  }
+  
+  pageNumber++;
+  if(pageNumber >= pageText.length){
+    pageNumber = 1;
+  }
   
 }
 
