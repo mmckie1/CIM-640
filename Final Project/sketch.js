@@ -28,8 +28,10 @@ var catArray = [];
 
 var start = false;
 var startButton;
+var nextPage;
 var instructions;
 var next = false;
+var previous = false;
 // String containing the most recently detected speech.
 var verse; 
 // Array of String containing the most recently detected speech. 
@@ -62,6 +64,9 @@ function setup() {
 		startButton.position(580,height/2);
 		startButton.mousePressed(startReading);
 		
+		nextButton = createButton('next');
+		nextButton.position(700,370);
+		nextButton.mousePressed(nextPage);
 
 		instructions = createElement('h2', 'Click Start to begin reading!');
 		instructions.position(450,100);
@@ -211,18 +216,6 @@ function drawBookCover() {
   
 }
 
-function keyPressed() {
-  if (keyCode === 39){
-    next = true;
-  }
-  
-  pageNumber++;
-  if(pageNumber >= pageText.length){
-    pageNumber = 1;
-  }
-  
-}
-
 function mousePressed() {
   start = true; 
 }
@@ -230,4 +223,12 @@ function mousePressed() {
 function startReading() {
     instructions.html('');
     startButton.remove();
+}
+
+function nextPage() {
+  next = true;
+   pageNumber++;
+  if(pageNumber >= pageText.length){
+    pageNumber = 1;
+  }
 }
