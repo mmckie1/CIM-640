@@ -71,8 +71,7 @@ function setup() {
 		instructions = createElement('h2', 'Click Start to begin reading!');
 		instructions.position(450,100);
 		
-		//controlls 
-		
+		//array of objects
 		book[1] = {
   
       drawPage: function() {
@@ -115,7 +114,7 @@ function setup() {
 		book[5] = {
   
       drawPage: function() {
-      scribble.scribbleRect(700, 90, 100, 100);
+      scribble.scribbleEllipse(700, 90, 100, 100);
       }
 		}
 		book[6] = {
