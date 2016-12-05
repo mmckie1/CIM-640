@@ -26,17 +26,29 @@ var pageNumber = 0;
 
 var catArray = [];
 
-var start = false;
+//Button variables
 var startButton;
 var nextPage;
+
+//Boolean variables
 var instructions;
+var start = false;
 var next = false;
 var previous = false;
+
+//images 
+var leaf;
+
 // String containing the most recently detected speech.
 var verse; 
 // Array of String containing the most recently detected speech. 
 var verseArray = [];
 
+
+function preload() {
+  //leaf = loadIamge("assets/");
+  
+}
 
 function setup() {
     
@@ -71,7 +83,24 @@ function setup() {
 	book[1] = {
   
     drawPage: function() {
+     //moon face
      scribble.scribbleEllipse(700, 90, 100, 100);
+     
+     // moon left eye
+     scribble.scribbleEllipse(680, 90, 10, 10);
+     
+     //moon right eye
+     scribble.scribbleEllipse(720, 90, 10, 10);
+     
+     //moon eyebrow
+     stroke(0);
+     scribble.scribbleLine(660,80,690,80);
+     scribble.scribbleLine(700,80,740,80);
+     
+     //moon mouth
+     scribble.scribbleCurve(660,100,690,100,660,100,690,200);
+
+     //image(leaf,0,0);
     }
 	}
 		
