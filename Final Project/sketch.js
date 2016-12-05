@@ -119,6 +119,7 @@ function setup() {
       scribble.scribbleRect(700, 90, 100, 100);
       }
 		}
+		
 	
 }
 
@@ -136,6 +137,8 @@ function draw() {
   if (next === true){
     drawLeftCanvas();
     image(leftCanvas, 0, 0);
+    drawRightCanvas();
+	  image(rightCanvas, 400, 0);
     //background(255, 100, 255);
     drawRightCanvas();
 	  image(rightCanvas, 400, 0);
@@ -234,3 +237,5 @@ function nextPage() {
     pageNumber = 1;
   }
 }
+
+
