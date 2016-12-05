@@ -40,85 +40,86 @@ var verseArray = [];
 
 function setup() {
     
-    createCanvas(800, 400);
+  createCanvas(800, 400);
 		
-		// instructions:
-		textSize(12);
-		textAlign(CENTER);
-		text("Click Start to begin reading!", 600,100);
+	// instructions:
+	textSize(12);
+	textAlign(CENTER);
+	text("Click Start to begin reading!", 600,100);
 		
-		leftCanvas = createGraphics(400,400);
-		rightCanvas = createGraphics(400,400);
+	leftCanvas = createGraphics(400,400);
+	rightCanvas = createGraphics(400,400);
 
-		//lexicon is a list of vocabulary words
-		lexicon = new RiLexicon(); 
-		scribble.bowing = 0.1;
-		scribble.roughness = 2;
+	//lexicon is a list of vocabulary words
+	lexicon = new RiLexicon(); 
+	scribble.bowing = 0.1;
+	scribble.roughness = 2;
 		
 		
-		//Side for animation
-    //drawLeftCanvas();
-    //image(leftCanvas, 0, 0);
+	//Side for animation
+  //drawLeftCanvas();
+  //image(leftCanvas, 0, 0);
 		
-		startButton = createButton('start');
-		startButton.position(580,height/2);
-		startButton.mousePressed(startReading);
+	startButton = createButton('start');
+	startButton.position(580,height/2);
+	startButton.mousePressed(startReading);
 
-		instructions = createElement('h2', 'Click Start to begin reading!');
-		instructions.position(450,100);
+	instructions = createElement('h2', 'Click Start to begin reading!');
+	instructions.position(450,100);
 		
-		//array of objects
-		book[1] = {
+	//array of objects
+	book[1] = {
   
-      drawPage: function() {
-      scribble.scribbleEllipse(700, 90, 100, 100);
-      }
-		}
+    drawPage: function() {
+     scribble.scribbleEllipse(700, 90, 100, 100);
+    }
+	}
 		
-		book[2] = {
+	book[2] = {
   
-      drawPage: function() {
-      scribble.scribbleRect(700, 90, 100, 100);
+    drawPage: function() {
+     scribble.scribbleRect(700, 90, 100, 100);
+    }
+	}
+		
+	book[3] = {
+		xpos: 550,
+		ypos: 250,
+  
+    drawPage: function() {
+      for (var i = 0; i < 6; i++) {
+        fill(0,random(255),0);
+        scribble.scribbleEllipse(this.xpos,this.ypos,20,50);
+        this.xpos = this.xpos + 20;
       }
-		}
-		book[3] = {
-		  xpos: 550,
-		  ypos: 250,
-  
-      drawPage: function() {
-        for (var i = 0; i < 6; i++) {
-          fill(0,random(255),0);
-          scribble.scribbleEllipse(this.xpos,this.ypos,20,50);
-          this.xpos = this.xpos + 20;
-        }
-        if (this.xpos = 400){
-          this.xpos = 550;
-        }
-        //eyes
-        fill(255,255,255);
-        strokeWeight(1);
-        ellipse(650,240,5,5);
-        ellipse(655,240,5,5);
-        }
-		}
-		book[4] = {
-  
-      drawPage: function() {
-      scribble.scribbleRect(700, 90, 100, 100);
+      if (this.xpos = 400){
+        this.xpos = 550;
       }
-		}
-		book[5] = {
-  
-      drawPage: function() {
+     //eyes
+     fill(255,255,255);
+     strokeWeight(1);
+     ellipse(650,240,5,5);
+     ellipse(655,240,5,5);
+   }
+	}
+		
+	book[4] = {
+    drawPage: function() {
+      scribble.scribbleRect(700, 90, 100, 100);
+    }
+	}
+	
+	book[5] = {
+    drawPage: function() {
       scribble.scribbleEllipse(700, 90, 100, 100);
-      }
-		}
-		book[6] = {
-  
-      drawPage: function() {
+    }
+	}
+	
+	book[6] = {
+    drawPage: function() {
       scribble.scribbleRect(700, 90, 100, 100);
-      }
-		}
+    }
+	}	
 		
 	
 }
