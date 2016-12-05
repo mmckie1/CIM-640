@@ -223,20 +223,22 @@ function drawNextButton() {
 }
 
 function mousePressed() {
-  start = true; 
 }
 
 function startReading() {
-    instructions.html('');
-    startButton.remove();
+  start = true; 
+  instructions.html('');
+  startButton.remove();
 }
 
 function nextPage() {
   next = true;
-   pageNumber++;
+  pageNumber++;
+  
   if(pageNumber >= pageText.length){
     pageNumber = 1;
   }
+  
 }
 
 
