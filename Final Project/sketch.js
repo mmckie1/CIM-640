@@ -128,6 +128,7 @@ function draw() {
   frameRate(5);
   
   //Side for text 
+  background(255, 100, 255);
   drawRightCanvas();
 	image(rightCanvas, 400, 0);
   if (start === true) { 
