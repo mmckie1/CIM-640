@@ -58,28 +58,29 @@ function setup() {
 	textSize(12);
 	textAlign(CENTER);
 	text("Click Start to begin reading!", 600,100);
-		
+	
+	//left canvas will be display area for story text	
 	leftCanvas = createGraphics(400,400);
+	
+	//rightCanvas will be display are for story animation
 	rightCanvas = createGraphics(400,400);
 
 	//lexicon is a list of vocabulary words
 	lexicon = new RiLexicon(); 
 	scribble.bowing = 0.1;
 	scribble.roughness = 2;
-		
-		
-	//Side for animation
-  //drawLeftCanvas();
-  //image(leftCanvas, 0, 0);
-		
+
+	
 	startButton = createButton('start');
 	startButton.position(580,height/2);
 	startButton.mousePressed(startReading);
-
+  
+  //instructions
 	instructions = createElement('h2', 'Click Start to begin reading!');
 	instructions.position(450,100);
 		
 	//array of objects
+	//page animations 
 	book[1] = {
   
     drawPage: function() {
@@ -156,7 +157,6 @@ function setup() {
 function draw() {
   frameRate(5);
   
-  //Side for text 
   background(255, 100, 255);
   drawRightCanvas();
 	image(rightCanvas, 400, 0);
@@ -170,7 +170,6 @@ function draw() {
     image(leftCanvas, 0, 0);
     drawRightCanvas();
 	  image(rightCanvas, 400, 0);
-    //background(255, 100, 255);
     drawRightCanvas();
 	  image(rightCanvas, 400, 0);
     text(pageText[pageNumber], 0, 100, 400, 100);
