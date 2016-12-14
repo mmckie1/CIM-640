@@ -24,7 +24,6 @@ var pageText = [,"In the light of the moon a little egg lay on a leaf.",
               "On Tuesday he ate through 2 pear, but he was still hungry.", "On Wednesday he ate through 3 plums, but he was still hungry."]; 
 var pageNumber = 0;
 
-var catArray = [];
 
 //Button variables
 var startButton;
@@ -46,13 +45,14 @@ var verseArray = [];
 
 
 function preload() {
-  //leaf = loadIamge("assets/");
+   leaf = loadImage("assets/leaf.png");
   
 }
 
 function setup() {
     
   createCanvas(800, 400);
+  
 		
 	// instructions:
 	textSize(12);
@@ -79,44 +79,133 @@ function setup() {
 	instructions = createElement('h2', 'Click Start to begin reading!');
 	instructions.position(450,100);
 		
-	//array of objects
-	//page animations 
+	//array of objects that are the page animations
 	book[1] = {
+	  xL: 400,
+	  xR: 800,
+	  yT: 300,
+	  yB: 400,
+	  gap: 2,
+	  angle: 315,
   
     drawPage: function() {
-     //moon face
-     scribble.scribbleEllipse(700, 90, 100, 100);
+      //stars
+      
+      //moon face
+      scribble.scribbleEllipse(700, 90, 100, 100);
      
-     // moon left eye
-     scribble.scribbleEllipse(680, 90, 10, 10);
+      // moon left eye
+      ellipse(680, 90, 10, 10);
      
-     //moon right eye
-     scribble.scribbleEllipse(720, 90, 10, 10);
+      //moon right eye
+      ellipse(720, 90, 10, 10);
      
-     //moon eyebrow
-     stroke(0);
-     scribble.scribbleLine(660,80,690,80);
-     scribble.scribbleLine(700,80,740,80);
+      //moon eyebrow
+      stroke(0);
+      scribble.scribbleLine(660,80,690,80);
+      scribble.scribbleLine(700,80,740,80);
      
-     //moon mouth
-     scribble.scribbleCurve(660,100,690,100,660,100,690,200);
+      //moon mouth
+      scribble.scribbleCurve(690,110,720,110,695,110,690,150);
+     
+      //grass
+      noStroke();
+      fill(85,255,47);
+      rect(400,300,400,400);
+      // the x coordinates of the border points of the hachure
+      var xCoor = [this.xL, this.xR, this.xR, this.xL];
+      // the y coordinates of the border points of the hachure
+	    var yCoor = [this.yT, this.yT, this.yB, this.yB];
+      strokeWeight(2);
+      stroke(85,200,47);
+      // fill the grass with a hachure
+      scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
+      
+      //leaf 
+      image(leaf,530,160,200,200);
+      
+      //egg
+      noStroke();
+      fill(255,255,255);
+      ellipse(600, 250, 20,30);
 
-     //image(leaf,0,0);
     }
 	}
 		
 	book[2] = {
+	  xL: 400,
+	  xR: 800,
+	  yT: 300,
+	  yB: 400,
+	  gap: 2,
+	  angle: 315,
+	  
+	  sunY: 350,
+	  sunSpeed: 3,
+	  sunWidth: 100,
+	  sunHeight: 100,
   
     drawPage: function() {
-     scribble.scribbleRect(700, 90, 100, 100);
+      
+      //rising sun
+      noStroke();
+      fill(255,165,0);
+      ellipse(600,this.sunY,this.sunWidth,this.sunHeight);
+      
+      this.sunSpeed++;
+      this.sunY = this.sunY - this.sunSpeed;
+      this.sunWidth = this.sunWidth + 10;
+      this.sunHeight = this.sunHeight + 10;
+      
+      if (this.sunY < 150) {
+        this.sunY = 150;
+      }
+      
+      if (this.sunWidth > 200 && this.sunHeight > 200) {
+        this.sunWidth = 200;
+        this.sunHeight = 200;
+      }
+      
+      
+      //grass
+      fill(85,255,47);
+      rect(400,300,400,400);
+      // the x coordinates of the border points of the hachure
+      var xCoor = [this.xL, this.xR, this.xR, this.xL];
+      // the y coordinates of the border points of the hachure
+	    var yCoor = [this.yT, this.yT, this.yB, this.yB];
+      strokeWeight(2);
+      stroke(85,200,47);
+      // fill the grass with a hachure
+      scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
+      
     }
 	}
 		
 	book[3] = {
 		xpos: 550,
 		ypos: 250,
+		
+		xL: 400,
+	  xR: 800,
+	  yT: 300,
+	  yB: 400,
+	  gap: 2,
+	  angle: 315,
   
     drawPage: function() {
+      //grass
+      // the x coordinates of the border points of the hachure
+      var xCoor = [this.xL, this.xR, this.xR, this.xL];
+      // the y coordinates of the border points of the hachure
+	    var yCoor = [this.yT, this.yT, this.yB, this.yB];
+      strokeWeight(2);
+      stroke(85,200,47);
+      // fill the grass with a hachure
+      scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
+      
+      //catepillar
+      stroke(0);
       for (var i = 0; i < 6; i++) {
         fill(0,random(255),0);
         scribble.scribbleEllipse(this.xpos,this.ypos,20,50);
@@ -134,19 +223,72 @@ function setup() {
 	}
 		
 	book[4] = {
+	  xL: 400,
+	  xR: 800,
+	  yT: 300,
+	  yB: 400,
+	  gap: 2,
+	  angle: 315,
+	  
     drawPage: function() {
+      //grass
+      // the x coordinates of the border points of the hachure
+      var xCoor = [this.xL, this.xR, this.xR, this.xL];
+      // the y coordinates of the border points of the hachure
+	    var yCoor = [this.yT, this.yT, this.yB, this.yB];
+      strokeWeight(2);
+      stroke(85,200,47);
+      // fill the grass with a hachure
+      scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
+      
+      stroke(0);
       scribble.scribbleRect(700, 90, 100, 100);
     }
 	}
 	
 	book[5] = {
+	  xL: 400,
+	  xR: 800,
+	  yT: 300,
+	  yB: 400,
+	  gap: 2,
+	  angle: 315,
+	  
     drawPage: function() {
+      //grass
+      // the x coordinates of the border points of the hachure
+      var xCoor = [this.xL, this.xR, this.xR, this.xL];
+      // the y coordinates of the border points of the hachure
+	    var yCoor = [this.yT, this.yT, this.yB, this.yB];
+      strokeWeight(2);
+      stroke(85,200,47);
+      // fill the grass with a hachure
+      scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
+      
+      stroke(0);
       scribble.scribbleEllipse(700, 90, 100, 100);
     }
 	}
 	
 	book[6] = {
+	  xL: 400,
+	  xR: 800,
+	  yT: 300,
+	  yB: 400,
+	  gap: 2,
+	  angle: 315,
     drawPage: function() {
+      //grass
+      // the x coordinates of the border points of the hachure
+      var xCoor = [this.xL, this.xR, this.xR, this.xL];
+      // the y coordinates of the border points of the hachure
+	    var yCoor = [this.yT, this.yT, this.yB, this.yB];
+      strokeWeight(2);
+      stroke(85,200,47);
+      // fill the grass with a hachure
+      scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
+      
+      stroke(0);
       scribble.scribbleRect(700, 90, 100, 100);
     }
 	}	
@@ -170,8 +312,6 @@ function draw() {
     image(leftCanvas, 0, 0);
     drawRightCanvas();
 	  image(rightCanvas, 400, 0);
-    drawRightCanvas();
-	  image(rightCanvas, 400, 0);
     text(pageText[pageNumber], 0, 100, 400, 100);
     book[pageNumber].drawPage();
   }
@@ -183,7 +323,7 @@ function drawLeftCanvas() {
   leftCanvas.background(0,0,0);
   leftCanvas.fill(255,255,255);
   leftCanvas.textSize(20);
-  leftCanvas.text("this is the left!", 50,50);
+  leftCanvas.text("Page " + pageNumber, 50,50);
   
 }
 
@@ -206,7 +346,7 @@ function drawBookCover() {
   // the x coordinates of the border points of the hachure
   var xCoords = [xleft, xright, xright, xleft];
   // the y coordinates of the border points of the hachure
-  var yCoords = [ytop, ytop, ybottom, ybottom];
+  var yCoords = [ ytop, ytop, ybottom, ybottom ];
   // the gap between two hachure lines
   var gap     = 3.5;
   // the angle of the hachure in degrees
