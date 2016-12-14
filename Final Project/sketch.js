@@ -240,6 +240,18 @@ function setup() {
   
     drawPage: function() {
       
+      //rising and setting sun    
+      var rg = map(abs((millis()%10000)-5000),0,5000,0,255);
+      //background(rg,rg,0);
+      push();
+      translate(0,100);
+      rotate(-PI);
+      rotate(map(millis()%10000,0,10000,0,TWO_PI));
+      //the Sun 
+      fill(255-rg,165,0);
+      ellipse(650,-100,150,150);
+      pop();
+      
       //grass
       noStroke();
       fill(85,255,47);
@@ -266,6 +278,8 @@ function setup() {
       if (this.xpos > 700){
         this.xpos = 405;
       }
+      
+   
    }
 	}
 		
