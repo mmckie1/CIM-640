@@ -144,13 +144,15 @@ function setup() {
 	  sunSpeed: 3,
 	  sunWidth: 100,
 	  sunHeight: 100,
+	  
+	  eggX: 560,
   
     drawPage: function() {
       
       //rising sun
       noStroke();
       fill(255,165,0);
-      ellipse(600,this.sunY,this.sunWidth,this.sunHeight);
+      ellipse(610,this.sunY,this.sunWidth,this.sunHeight);
       
       this.sunSpeed++;
       this.sunY = this.sunY - this.sunSpeed;
@@ -165,9 +167,9 @@ function setup() {
         this.sunWidth = 200;
         this.sunHeight = 200;
       }
-      
-      
+
       //grass
+      noStroke();
       fill(85,255,47);
       rect(400,300,400,400);
       // the x coordinates of the border points of the hachure
@@ -179,7 +181,32 @@ function setup() {
       // fill the grass with a hachure
       scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
       
+      //leaf 
+      image(leaf,530,250,100,100);
+      
+      //egg
+      noStroke();
+      fill(255,255,255);
+      ellipse(560, 300, 10,10);
+      
+      //egg breaks revealing very hungry caterpillar
+      if(this.sunY === 150){
+        image(leaf,530,250,100,100);
+        
+        arc(560,300,10,10, -HALF_PI,HALF_PI);
+        arc(this.eggX,300,10,10, HALF_PI,-HALF_PI);
+        
+        this.eggX = this.eggX - 5;
+        
+        if (this.eggX < 550){
+          this.eggX = 550;
+        }
+        
+      }
+      
+      
     }
+    
 	}
 		
 	book[3] = {
@@ -194,7 +221,11 @@ function setup() {
 	  angle: 315,
   
     drawPage: function() {
+      
       //grass
+      noStroke();
+      fill(85,255,47);
+      rect(400,300,400,400);
       // the x coordinates of the border points of the hachure
       var xCoor = [this.xL, this.xR, this.xR, this.xL];
       // the y coordinates of the border points of the hachure
@@ -232,6 +263,9 @@ function setup() {
 	  
     drawPage: function() {
       //grass
+      noStroke();
+      fill(85,255,47);
+      rect(400,300,400,400);
       // the x coordinates of the border points of the hachure
       var xCoor = [this.xL, this.xR, this.xR, this.xL];
       // the y coordinates of the border points of the hachure
@@ -256,6 +290,9 @@ function setup() {
 	  
     drawPage: function() {
       //grass
+      noStroke();
+      fill(85,255,47);
+      rect(400,300,400,400);
       // the x coordinates of the border points of the hachure
       var xCoor = [this.xL, this.xR, this.xR, this.xL];
       // the y coordinates of the border points of the hachure
@@ -279,6 +316,9 @@ function setup() {
 	  angle: 315,
     drawPage: function() {
       //grass
+      noStroke();
+      fill(85,255,47);
+      rect(400,300,400,400);
       // the x coordinates of the border points of the hachure
       var xCoor = [this.xL, this.xR, this.xR, this.xL];
       // the y coordinates of the border points of the hachure
