@@ -146,6 +146,9 @@ function setup() {
 	  sunHeight: 100,
 	  
 	  eggX: 560,
+	  
+	  xpos: 550,
+		ypos: 310,
   
     drawPage: function() {
       
@@ -184,6 +187,7 @@ function setup() {
       //leaf 
       image(leaf,530,250,100,100);
       
+      
       //egg
       noStroke();
       fill(255,255,255);
@@ -201,8 +205,22 @@ function setup() {
         if (this.eggX < 550){
           this.eggX = 550;
         }
-        
       }
+      
+        if(this.eggX <= 550){
+          strokeWeight(1);
+          stroke(0);
+          for (var i = 0; i < 6; i++) {
+            fill(0,random(255),0);
+            scribble.scribbleEllipse(this.xpos,this.ypos,10,20);
+            this.xpos = this.xpos + 10;
+          }
+        this.xpos++;  
+         if (this.xpos > 600){
+            this.xpos = 600;
+          }
+        }
+      
       
       
     }
@@ -210,8 +228,8 @@ function setup() {
 	}
 		
 	book[3] = {
-		xpos: 550,
-		ypos: 250,
+		xpos: 450,
+		ypos: 300,
 		
 		xL: 400,
 	  xR: 800,
@@ -236,20 +254,18 @@ function setup() {
       scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
       
       //catepillar
+      strokeWeight(1);
       stroke(0);
       for (var i = 0; i < 6; i++) {
         fill(0,random(255),0);
         scribble.scribbleEllipse(this.xpos,this.ypos,20,50);
         this.xpos = this.xpos + 20;
       }
-      if (this.xpos = 400){
-        this.xpos = 550;
+      this.xpos++;
+      
+      if (this.xpos > 700){
+        this.xpos = 405;
       }
-     //eyes
-     fill(255,255,255);
-     strokeWeight(1);
-     ellipse(650,240,5,5);
-     ellipse(655,240,5,5);
    }
 	}
 		
