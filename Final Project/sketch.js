@@ -519,7 +519,6 @@ function draw() {
     next = false;
     end = true;
   }
-  console.log(pageNumber);
 
 }
 
