@@ -1,14 +1,14 @@
 <h2>Who it is for?</h2>
-Children 5-10 years old 
+<li>Children 5-10 years old</li>
 <h2>What is it or for?</h2>
 This web application would give children 5-10 years old a fun and interactive way to learn how to read. I endeavor to show children that the key to unlocking their imagination is through reading. 
-Why does it need to exist?
+<h2>Why does it need to exist?</h2>
 This web application needs to exist because with the change in technology over the years there has been a shift in how children learn.  Children are stimulated by different technology driven learning aids. This program would show them that by just reading, they could potentially speak anything into existence.   
-Where would it be displayed?
+<h2>Where would it be displayed?</h2>
 This would be a on-line program that they could play.  
-When will it be viewed?
+<h2>When will it be viewed?</h2>
 It would be viewed whenever a person logs-on to the site. 
-How will you execute it?
+<h2>How will you execute it?</h2>
 Code Plan
 The design for this program would imitate the look of a book.. 
 When the user first begins the simulation they be prompted to "Click start to  begin reading!". Underneath prompt will be a "start" button.
