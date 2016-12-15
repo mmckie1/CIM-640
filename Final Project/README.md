@@ -1,6 +1,9 @@
 Who it is for?
+
 Children 5-10 years old 
+
 What is it or for?
+
 This web application would give children 5-10 years old a fun and interactive way to learn how to read. I endeavor to show children that the key to unlocking their imagination is through reading. 
 Why does it need to exist?
 This web application needs to exist because with the change in technology over the years there has been a shift in how children learn.  Children are stimulated by different technology driven learning aids. This program would show them that by just reading, they could potentially speak anything into existence.   
