@@ -18,7 +18,7 @@ var scribble = new Scribble();
 var leftCanvas;
 var rightCanvas;
 var book = [];
-var pageText = [,"In the light of the moon a little egg lay on a leaf.", 
+var pageText = ["The End","In the light of the moon a little egg lay on a leaf.", 
               "On Sunday morning the warm sun came up and pop! - out of the egg came a tiny and very hungry Caterpillar.",
               "He started to look for some food.", "On Monday he ate through 1 apple. But he was still humgry.", 
               "On Tuesday he ate through 2 pear, but he was still hungry.", "On Wednesday he ate through 3 plums, but he was still hungry."]; 
@@ -101,6 +101,32 @@ function setup() {
 	instructions.position(450,100);
 		
 	//array of objects that are the page animations
+	book[0] = {
+	  xL: 0,
+	  xR: 800,
+	  yT: 0,
+	  yB: 400,
+	  gap: 2,
+	  angle: 315,
+
+	  drawPage:function() {
+	    background(255,255,255);
+	    //cover
+      // the x coordinates of the border points of the hachure
+      var xCoor = [this.xL, this.xR, this.xR, this.xL];
+      // the y coordinates of the border points of the hachure
+	    var yCoor = [this.yT, this.yT, this.yB, this.yB];
+      strokeWeight(2);
+      stroke(0,0,0);
+      // fill the grass with a hachure
+      scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
+      textSize(70);
+	    fill(255,255,255);
+	    text("The End!!", width/2,height/2);
+	    
+	  
+	  } 
+	}
 	book[1] = {
 	  xL: 400,
 	  xR: 800,
@@ -489,6 +515,11 @@ function draw() {
     text(pageText[pageNumber], 0, 100, 400, 100);
     book[pageNumber].drawPage();
   }
+  if (pageNumber === pageText.length) {
+    next = false;
+    end = true;
+  }
+  console.log(pageNumber);
 
 }
 
@@ -579,9 +610,10 @@ function nextPage() {
   pageNumber++;
   
   if(pageNumber >= pageText.length){
-    pageNumber = 1;
+    pageNumber = 0;
   }
   
 }
+
 
 
