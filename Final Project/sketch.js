@@ -37,6 +37,13 @@ var previous = false;
 
 //images 
 var leaf;
+var rightApple;
+var leftApple;
+var appleWhole;
+var appleimg;
+var rightPear;
+var leftPear;
+var wholePear;
 
 // String containing the most recently detected speech.
 var verse; 
@@ -46,6 +53,11 @@ var verseArray = [];
 
 function preload() {
    leaf = loadImage("assets/leaf.png");
+   rightApple = loadImage("assets/right_apple.png");
+   leftApple = loadImage("assets/left_apple.png");
+   rightPear = loadImage("assets/right_pear.png");
+   leftPear = loadImage("assets/left_pear.png");
+   
   
 }
 
@@ -53,7 +65,9 @@ function setup() {
     
   createCanvas(800, 400);
   
-		
+	appleimg = createImg("assets/whole_apple.png");
+	wholePear = createImg("assets/whole_pear.png");
+
 	// instructions:
 	textSize(12);
 	textAlign(CENTER);
@@ -92,16 +106,18 @@ function setup() {
       //stars
       
       //moon face
-      scribble.scribbleEllipse(700, 90, 100, 100);
+      noStroke();
+      ellipse(700, 90, 150, 150);
      
       // moon left eye
+      strokeWeight(2);
+      stroke(0);
       ellipse(680, 90, 10, 10);
      
       //moon right eye
       ellipse(720, 90, 10, 10);
      
       //moon eyebrow
-      stroke(0);
       scribble.scribbleLine(660,80,690,80);
       scribble.scribbleLine(700,80,740,80);
      
@@ -240,7 +256,8 @@ function setup() {
   
     drawPage: function() {
       
-      //rising and setting sun    
+      //rising and setting sun  
+      noStroke();
       var rg = map(abs((millis()%10000)-5000),0,5000,0,255);
       //background(rg,rg,0);
       push();
@@ -284,6 +301,9 @@ function setup() {
 	}
 		
 	book[4] = {
+	  xpos: 410,
+		ypos: 300,
+		
 	  xL: 400,
 	  xR: 800,
 	  yT: 300,
@@ -292,6 +312,7 @@ function setup() {
 	  angle: 315,
 	  
     drawPage: function() {
+      frameRate(5);
       //grass
       noStroke();
       fill(85,255,47);
@@ -305,12 +326,38 @@ function setup() {
       // fill the grass with a hachure
       scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
       
+      //apple
+      image(rightApple,610,250,50,70);
+      
+      strokeWeight(1);
       stroke(0);
-      scribble.scribbleRect(700, 90, 100, 100);
+      for (var i = 0; i < 6; i++) {
+        fill(0,random(255),0);
+        scribble.scribbleEllipse(this.xpos,this.ypos,20,30);
+        this.xpos = this.xpos + 20;
+      }
+      this.xpos = this.xpos+1;
+      
+      appleimg.position(600,280);
+      appleimg.size(30,30);
+
+      image(leftApple,560,250,50,70);
+      
+      if (this.xpos > 600) {
+        appleimg.hide();
+      }
+      
+      
+      noStroke();
+      fill(255,165,0);
+      ellipse(700, 90, 150, 150);
     }
 	}
 	
 	book[5] = {
+	  xpos: 410,
+		ypos: 300,
+		
 	  xL: 400,
 	  xR: 800,
 	  yT: 300,
@@ -332,8 +379,31 @@ function setup() {
       // fill the grass with a hachure
       scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
       
+      //apple
+      image(rightPear,610,250,50,70);
+      
+      strokeWeight(1);
       stroke(0);
-      scribble.scribbleEllipse(700, 90, 100, 100);
+      for (var i = 0; i < 6; i++) {
+        fill(0,random(255),0);
+        scribble.scribbleEllipse(this.xpos,this.ypos,20,30);
+        this.xpos = this.xpos + 20;
+      }
+      this.xpos = this.xpos+1;
+      
+      wholePear.position(600,280);
+      wholePear.size(30,30);
+
+      image(leftPear,560,250,50,70);
+      
+      if (this.xpos > 600) {
+        wholePear.hide();
+      }
+      
+      
+      noStroke();
+      fill(255,165,0);
+      ellipse(700, 90, 150, 150);
     }
 	}
 	
