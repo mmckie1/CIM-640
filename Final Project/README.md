@@ -1,4 +1,4 @@
-<h1>Who it is for?</h1>
+<h2>Who it is for?</h2>
 
 Children 5-10 years old 
 
