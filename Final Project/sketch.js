@@ -34,6 +34,7 @@ var instructions;
 var start = false;
 var next = false;
 var previous = false;
+var end = false;
 
 //images 
 var leaf;
@@ -44,6 +45,9 @@ var appleimg;
 var rightPear;
 var leftPear;
 var wholePear;
+var rightPlum;
+var leftPlum;
+var wholePlum;
 
 // String containing the most recently detected speech.
 var verse; 
@@ -57,6 +61,8 @@ function preload() {
    leftApple = loadImage("assets/left_apple.png");
    rightPear = loadImage("assets/right_pear.png");
    leftPear = loadImage("assets/left_pear.png");
+   rightPlum = loadImage("assets/right_plum.png");
+   leftPlum = loadImage("assets/left_plum.png");
    
   
 }
@@ -67,6 +73,7 @@ function setup() {
   
 	appleimg = createImg("assets/whole_apple.png");
 	wholePear = createImg("assets/whole_pear.png");
+	wholePlum = createImg("assets/whole_plum.png");
 
 	// instructions:
 	textSize(12);
@@ -327,7 +334,7 @@ function setup() {
       scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
       
       //apple
-      image(rightApple,610,250,50,70);
+      image(rightApple,610,255,50,65);
       
       strokeWeight(1);
       stroke(0);
@@ -379,8 +386,8 @@ function setup() {
       // fill the grass with a hachure
       scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
       
-      //apple
-      image(rightPear,610,250,50,70);
+      //pear
+      image(rightPear,610,255,50,65);
       
       strokeWeight(1);
       stroke(0);
@@ -408,12 +415,16 @@ function setup() {
 	}
 	
 	book[6] = {
+	  xpos: 410,
+		ypos: 300,
+		
 	  xL: 400,
 	  xR: 800,
 	  yT: 300,
 	  yB: 400,
 	  gap: 2,
 	  angle: 315,
+	  
     drawPage: function() {
       //grass
       noStroke();
@@ -428,8 +439,31 @@ function setup() {
       // fill the grass with a hachure
       scribble.scribbleFilling(xCoor,yCoor,this.gap,this.angle);
       
+      //plum
+      image(rightPlum,610,275,30,45);
+      
+      strokeWeight(1);
       stroke(0);
-      scribble.scribbleRect(700, 90, 100, 100);
+      for (var i = 0; i < 6; i++) {
+        fill(0,random(255),0);
+        scribble.scribbleEllipse(this.xpos,this.ypos,20,30);
+        this.xpos = this.xpos + 20;
+      }
+      this.xpos = this.xpos+1;
+      
+      wholePlum.position(600,280);
+      wholePlum.size(30,30);
+
+      image(leftPlum,560,250,50,70);
+      
+      if (this.xpos > 600) {
+        wholePlum.hide();
+      }
+      
+      
+      noStroke();
+      fill(255,165,0);
+      ellipse(700, 90, 150, 150);
     }
 	}	
 		
