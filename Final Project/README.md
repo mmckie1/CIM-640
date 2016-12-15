@@ -10,7 +10,7 @@ This would be a on-line program that they could play.
 It would be viewed whenever a person logs-on to the site. 
 <h2>How will you execute it?</h2>
 <ul>
-Code Plan
+<h3>Code Plan</h3>
 <li>The design for this program would imitate the look of a book.</li>
 <li>When the user first begins the simulation they be prompted to "Click start to  begin reading!". Underneath prompt will be a "start" button.</li>
 <li>When user clicks the "start" button -> the canvas will be split in two.</li>
