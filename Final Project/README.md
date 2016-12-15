@@ -1,5 +1,5 @@
 <h1>Final Project: Interactive Reading</h1>
-<ul>This is a web application made with <a herf ="http://p5js.org/">p5.js</a>, <a herf ="https://github.com/generative-light/p5.scribble.js">p5.scribble</a> and <a herf="http://ability.nyu.edu/p5.js-speech/">p5.speech</a> that enables the user to read along with their favoriate book The Very Hungry Caterpillar by Eric Carle. 
+<ul>This is a web application made with <a herf ="http://p5js.org/">p5.js</a>, <a herf ="https://github.com/generative-light/p5.scribble.js">p5.scribble,</a> and <a herf="http://ability.nyu.edu/p5.js-speech/">p5.speech</a> libraries that enables the user to read along with their favoriate book The Very Hungry Caterpillar by Eric Carle. 
 <h2>Who it is for?</h2>
 Children 5-10 years old
 <h2>What is it or for?</h2>
